@@ -4,3 +4,6 @@ function scrollSmoothTo(element) {
 	}, 1000);
 }
 
+if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+    $(".header").css("height", -44)
+}
