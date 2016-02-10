@@ -27,6 +27,7 @@
 	height: 25rem;
 	overflow: hidden;
     position: relative;
+    box-shadow: inset 0px 0px 40px 0px rgba(0,0,0,0.75);
 }
 
 .img-wrapper img {
@@ -77,11 +78,13 @@
 }
 
 /* columns */
-.big.column {
-    width: 74.0%;
-}
-.small.column {
-    width: 22%;
+@media (min-width: 550px) {
+    .big.column {
+        width: 74.0%;
+    }
+    .small.column {
+        width: 22%;
+    }
 }
 @media (min-width: 900px) {
     .big.column {
