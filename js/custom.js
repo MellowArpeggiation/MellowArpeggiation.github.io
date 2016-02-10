@@ -9,5 +9,12 @@ if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
 }
 
 $(window).scroll(function () {
-    
+    $(".img-wrapper img").each(function (e) {
+        var bodyScrollTop = $("body").scrollTop(),
+            imgOffsetTop = $(this).parent().offset().top,
+            scrollHeightOfElement = ((bodyScrollTop - imgOffsetTop) * 1.3) - ($(window).height() / 6);
+        
+        $(this).css("top", scrollHeightOfElement);
+        console.log(scrollHeightOfElement);
+    })
 })
