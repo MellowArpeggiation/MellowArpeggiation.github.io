@@ -15,7 +15,7 @@
 }
 
 .screenshot-wrapper {
-	height: 30rem;
+	height: 25rem;
 	overflow: hidden;
 }
 
@@ -42,33 +42,32 @@
 	outline: none;
 }
 
-@supports (perspective: 10px) {
-	.parallax-container {
-		perspective: 8px;
-		perspective-origin: top;
-		height: 100vh;
-		overflow-x: hidden;
-		overflow-y: auto;
-	}
-	
-	.screenshot-wrapper {
-		position: relative;
-	}
-	
-	.screenshot-wrapper img {
-		transform: translate3d(0, 0, -1px) scale(1.15);
-		position: absolute;
-	}
+.parallax-container {
+	perspective: 8px;
+	perspective-origin: top;
+	height: 100vh;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.screenshot-wrapper {
+	position: relative;
+}
+
+.screenshot-wrapper img {
+	transform: translate3d(0, 26px, -1px) scale(1.15);
+	position: absolute;
 }
 
 @media (min-width: 550px) {
-	.header {
-		/*margin-top: 18rem;
-		margin-bottom: 18rem;*/
-	}
-	
 	.screenshot-wrapper img {
-		transform: translate3d(-6%, 0, -1px) scale(1.15);
+		transform: translate3d(-6%, 30px, -1px) scale(1.15);
+	}
+}
+
+@media (min-width: 750px) {
+	.screenshot-wrapper {
+		height: 30rem
 	}
 }
 
