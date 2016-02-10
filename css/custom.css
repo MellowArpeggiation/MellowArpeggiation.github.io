@@ -7,7 +7,7 @@
     width: 100%;
     position: absolute;
     
-    background-image: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, #fff 100%), linear-gradient(50deg, #fffbeb 32%, #c0eeff);
+    background-image: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, #fff 100%), linear-gradient(70deg, #fdf2c3 32%, #c0eeff);
 }
 
 .header {
