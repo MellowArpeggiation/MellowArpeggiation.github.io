@@ -1,4 +1,8 @@
+/*global $, requestAnimationFrame*/
+
 function scrollSmoothTo(element) {
+	'use strict';
+	
 	$('html body').animate({
 		scrollTop: $(element).offset().top
 	}, 1000);
@@ -7,7 +11,9 @@ function scrollSmoothTo(element) {
 var currentScrollTop = $("body").scrollTop(),
     oldScrollTop;
 function setImgScroll() {
-     $(".img-wrapper img").each(function (e) {
+	'use strict';
+	
+	$(".img-wrapper img").each(function (e) {
         var imgOffsetTop = $(this).parent().offset().top,
             scrollHeightOfElement = ((currentScrollTop - imgOffsetTop) * 0.7) - ($(window).height() / 5) + (imgOffsetTop / 20);
         
@@ -16,6 +22,8 @@ function setImgScroll() {
 }
 
 function animLoop() {
+	'use strict';
+	
     if (currentScrollTop !== oldScrollTop) {
         setImgScroll();
         oldScrollTop = currentScrollTop;
@@ -24,11 +32,13 @@ function animLoop() {
 }
 
 if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
-    $(".header").css("margin-top", -70)
+    $(".header").css("margin-top", -70);
 }
 
 $(window).scroll(function () {
+	'use strict';
+	
     currentScrollTop = $("body").scrollTop();
-})
+});
 
 animLoop();
