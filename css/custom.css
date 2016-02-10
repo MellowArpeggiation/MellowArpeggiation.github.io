@@ -77,7 +77,8 @@
 }
 
 .fade-drop-in {
-	animation: fadedropin 1.5s ease-out 1.5s;
+	opacity: 0;
+	animation: fadedropin 1.5s ease-out 1.5s forwards;
 }
 
 @keyframes fadein {
