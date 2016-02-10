@@ -8,9 +8,8 @@ var currentScrollTop = $("body").scrollTop(),
     oldScrollTop;
 function setImgScroll() {
      $(".img-wrapper img").each(function (e) {
-        var bodyScrollTop = $("body").scrollTop(),
-            imgOffsetTop = $(this).parent().offset().top,
-            scrollHeightOfElement = ((bodyScrollTop - imgOffsetTop) * 0.7) - ($(window).height() / 5) + (imgOffsetTop / 20);
+        var imgOffsetTop = $(this).parent().offset().top,
+            scrollHeightOfElement = ((currentScrollTop - imgOffsetTop) * 0.7) - ($(window).height() / 5) + (imgOffsetTop / 20);
         
         $(this).css("top", scrollHeightOfElement);
         console.log(scrollHeightOfElement);
