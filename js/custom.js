@@ -12,7 +12,7 @@ function setImgScroll() {
             scrollHeightOfElement = ((currentScrollTop - imgOffsetTop) * 0.7) - ($(window).height() / 5) + (imgOffsetTop / 20);
         
         $(this).css("top", scrollHeightOfElement);
-    })
+    });
 }
 
 function animLoop() {
