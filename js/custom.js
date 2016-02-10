@@ -1,5 +1,6 @@
 function scrollSmoothTo(element) {
-	$('.parallax-container').animate({
+	$('html body').animate({
 		scrollTop: $(element).offset().top
 	}, 1000);
 }
+

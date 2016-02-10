@@ -1,7 +1,16 @@
+.u-text-center {
+    text-align: center;
+}
+
+.background {
+    height: 10rem;
+    width: 100%;
+    position: absolute;
+    
+    background-image: linear-gradient(180deg, rgba(255,255,255,0) 60%, #fff),linear-gradient(70deg, #e0f1ff 32%, #fffae3);
+}
+
 .header {
-	text-align: center;
-	/*margin-top: 6rem;
-	margin-bottom: 4rem;*/
 	height: 100vh;
 	position: relative;
 }
@@ -32,37 +41,14 @@
 	border-width: 0.15em 0.15em 0 0;
 	content: '';
 	display: inline-block;
-	height: 1.5em;
-	width: 1.5em;
+	height: 2.5rem;
+	width: 2.5rem;
 	left: calc(50% - 0.75em);
 	position: absolute;
-	top: 90vh;
+	bottom: 3rem;
 	transform: rotate(135deg);
 	vertical-align: top;
 	outline: none;
-}
-
-.parallax-container {
-	perspective: 8px;
-	perspective-origin: top;
-	height: 100vh;
-	overflow-x: hidden;
-	overflow-y: auto;
-}
-
-.screenshot-wrapper {
-	position: relative;
-}
-
-.screenshot-wrapper img {
-	transform: translate3d(0, 26px, -1px) scale(1.15);
-	position: absolute;
-}
-
-@media (min-width: 550px) {
-	.screenshot-wrapper img {
-		transform: translate3d(-6%, 30px, -1px) scale(1.15);
-	}
 }
 
 @media (min-width: 750px) {
@@ -87,7 +73,7 @@
 
 @keyframes fadedropin {
     from {
-		margin-top: -20px;
+		margin-bottom: 40px;
 		opacity: 0;
 	}
     to {
