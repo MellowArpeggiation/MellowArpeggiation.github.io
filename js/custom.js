@@ -4,6 +4,8 @@ function scrollSmoothTo(element) {
 	}, 1000);
 }
 
+var currentScrollTop = $("body").scrollTop(),
+    oldScrollTop;
 function setImgScroll() {
      $(".img-wrapper img").each(function (e) {
         var bodyScrollTop = $("body").scrollTop(),
@@ -15,12 +17,20 @@ function setImgScroll() {
     })
 }
 
+function animLoop() {
+    if (currentScrollTop !== oldScrollTop) {
+        setImgScroll();
+        oldScrollTop = currentScrollTop;
+    }
+    requestAnimationFrame(animLoop);
+}
+
 if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
     $(".header").css("margin-top", -70)
 }
 
 $(window).scroll(function () {
-    setImgScroll();
+    currentScrollTop = $("body").scrollTop();
 })
 
-setImgScroll();
+animLoop();
