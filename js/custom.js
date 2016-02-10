@@ -9,7 +9,5 @@ if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
 }
 
 $(window).scroll(function () {
-    $(".header").css({
-        transform: "rotate(" + $(this).scrollTop() + "deg)"
-    })
+    
 })
