@@ -1,3 +1,5 @@
+/*global $*/
+
 function swapElegant(element) {
 	'use strict';
 	// This function changes the letters in "Elegant"
@@ -22,5 +24,7 @@ function swapElegant(element) {
 }
 
 $(".glitch").each(function () {
+	'use strict';
+	
 	setInterval(swapElegant, 50, this);
 });

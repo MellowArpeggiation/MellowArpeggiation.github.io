@@ -1,8 +1,9 @@
 /* Fonts */
 @font-face {
     font-family: secretcode;
-    src: url(fonts/secrcode.ttf) format('truetype'),
-		url(fonts/secrcode.woff) format('woff');
+    src: url(fonts/secrcode.woff) format('woff'),
+		 url(fonts/secrcode.ttf ) format('truetype');
+		
 }
 /*****/
 
