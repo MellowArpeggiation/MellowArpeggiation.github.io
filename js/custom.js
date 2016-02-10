@@ -5,5 +5,5 @@ function scrollSmoothTo(element) {
 }
 
 if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
-    $(".header").css("height", -44)
+    $(".header").css("margin-top", -44)
 }
