@@ -19,7 +19,7 @@ allImages.each(function (e) {
 	$(this).data("offsetTop", $(this).parent().offset().top);
 });
 
-function setImgScroll() {
+function setImgScroll(currentScrollY) {
 	'use strict';
 	
 	var i,
@@ -29,7 +29,7 @@ function setImgScroll() {
 	
 	for (i = 0; i < allImagesLength; i += 1) {
 		imgOffsetTop = $(allImages[i]).data("offsetTop");
-		scrollHeightOfElement = ((currentScrollTop - imgOffsetTop) * 0.7) - windowHeightReduced + (imgOffsetTop / 20);
+		scrollHeightOfElement = ((currentScrollY - imgOffsetTop) * 0.7) - windowHeightReduced + (imgOffsetTop / 20);
 		
 		$(allImages[i]).css("transform", "translateY(" + scrollHeightOfElement + "px)");
 	}
@@ -40,7 +40,7 @@ function animLoop() {
 	
 	requestAnimationFrame(animLoop);
 	if (currentScrollTop !== oldScrollTop) {
-		setImgScroll();
+		setImgScroll(currentScrollTop);
 		oldScrollTop = currentScrollTop;
 	}
 }
