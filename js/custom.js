@@ -57,4 +57,4 @@ $(window).scroll(function () {
 
 window.addEventListener("mousewheel", function () { 'use strict'; });
 
-animLoop();
+requestAnimationFrame(animLoop);
