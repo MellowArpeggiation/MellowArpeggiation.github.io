@@ -123,3 +123,10 @@
 		opacity: 1;
 	}
 }
+
+/* iPhone Safari fix */
+@media (orientation: portrait) {
+	.ios-safari-margin {
+		margin-top: -70px;
+	}
+}

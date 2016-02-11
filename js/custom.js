@@ -46,7 +46,7 @@ function animLoop() {
 }
 
 if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
-    $(".header").css("margin-top", -70);
+    $(".header").addClass("ios-safari-margin");
 }
 
 $(window).scroll(function () {
