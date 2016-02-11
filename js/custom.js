@@ -9,16 +9,30 @@ function scrollSmoothTo(element) {
 }
 
 var currentScrollTop = $("body").scrollTop(),
-    oldScrollTop;
+    oldScrollTop,
+	allImages = $(".img-wrapper img"),
+	allImagesLength = allImages.length;
+
+allImages.each(function (e) {
+	'use strict';
+	
+	$(this).data("offsetTop", $(this).parent().offset().top);
+});
+
 function setImgScroll() {
 	'use strict';
 	
-	$(".img-wrapper img").each(function (e) {
-        var imgOffsetTop = $(this).parent().offset().top,
-            scrollHeightOfElement = ((currentScrollTop - imgOffsetTop) * 0.7) - ($(window).height() / 5) + (imgOffsetTop / 20);
-        
-        $(this).css("top", scrollHeightOfElement);
-    });
+	var i,
+		imgOffsetTop,
+		scrollHeightOfElement,
+		windowHeightReduced = $(window).height() / 5;
+	
+	for (i = 0; i < allImagesLength; i += 1) {
+		imgOffsetTop = $(allImages[i]).data("offsetTop");
+		scrollHeightOfElement = ((currentScrollTop - imgOffsetTop) * 0.7) - windowHeightReduced + (imgOffsetTop / 20);
+		
+		$(allImages[i]).css("transform", "translateY(" + scrollHeightOfElement + "px)");
+	}
 }
 
 function animLoop() {

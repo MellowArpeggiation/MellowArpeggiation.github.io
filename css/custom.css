@@ -32,6 +32,8 @@
 .img-wrapper img {
     position: absolute;
     border-radius: 1rem;
+	will-change: transform;
+	transform: translateZ(0);
 }
 
 .img-wrapper-top {
