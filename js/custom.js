@@ -2,14 +2,14 @@
 
 function scrollSmoothTo(element) {
 	'use strict';
-	
+
 	$('html body').animate({
 		scrollTop: $(element).offset().top
 	}, 1000);
 }
 
 var currentScrollTop = $("body").scrollTop(),
-    oldScrollTop,
+	oldScrollTop,
 	allImages = $(".img-wrapper img"),
 	allImagesLength = allImages.length;
 
@@ -38,21 +38,21 @@ function setImgScroll() {
 function animLoop() {
 	'use strict';
 	
-    if (currentScrollTop !== oldScrollTop) {
-        setImgScroll();
-        oldScrollTop = currentScrollTop;
-    }
-    requestAnimationFrame(animLoop);
+	requestAnimationFrame(animLoop);
+	if (currentScrollTop !== oldScrollTop) {
+		setImgScroll();
+		oldScrollTop = currentScrollTop;
+	}
 }
 
 if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
-    $(".header").addClass("ios-safari-margin");
+	$(".header").addClass("ios-safari-margin");
 }
 
 $(window).scroll(function () {
 	'use strict';
 	
-    currentScrollTop = $("body").scrollTop();
+	currentScrollTop = $("body").scrollTop();
 });
 
 window.addEventListener("mousewheel", function () { 'use strict'; });
