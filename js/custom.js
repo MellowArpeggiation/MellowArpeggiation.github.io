@@ -55,4 +55,6 @@ $(window).scroll(function () {
     currentScrollTop = $("body").scrollTop();
 });
 
+window.addEventListener("mousewheel", function () { 'use strict'; });
+
 animLoop();
