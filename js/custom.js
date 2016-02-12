@@ -8,7 +8,7 @@ function scrollSmoothTo(element) {
 	}, 1000);
 }
 
-var currentScrollTop = $("body").scrollTop(),
+var currentScrollTop = $(window).scrollTop(),
 	oldScrollTop,
 	allImages = $(".img-wrapper img"),
 	allImagesLength = allImages.length;
@@ -52,7 +52,7 @@ if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
 $(window).scroll(function () {
 	'use strict';
 	
-	currentScrollTop = $("body").scrollTop();
+	currentScrollTop = $(window).scrollTop();
 });
 
 window.addEventListener("mousewheel", function () { 'use strict'; });
