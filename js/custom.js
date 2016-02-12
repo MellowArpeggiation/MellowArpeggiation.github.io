@@ -3,7 +3,7 @@
 function scrollSmoothTo(element) {
 	'use strict';
 
-	$('html body').animate({
+	$("html, body").animate({
 		scrollTop: $(element).offset().top
 	}, 1000);
 }
