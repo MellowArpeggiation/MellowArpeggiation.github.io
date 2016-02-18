@@ -37,7 +37,6 @@
 	
 	-webkit-backface-visibility: hidden; /* iOS prefix */
 	backface-visibility: hidden;
-	perspective: 1000;
 }
 
 .img-wrapper-top {
