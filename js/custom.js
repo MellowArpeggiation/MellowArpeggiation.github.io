@@ -52,7 +52,7 @@ if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
 $(window).scroll(function () {
 	'use strict';
 	
-	currentScrollTop = $(window).scrollTop();
+	currentScrollTop = window.pageYOffset;
 });
 
 window.addEventListener("mousewheel", function () { 'use strict'; });
