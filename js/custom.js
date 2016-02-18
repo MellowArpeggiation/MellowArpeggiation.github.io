@@ -31,7 +31,7 @@ function setImgScroll(currentScrollY) {
 		imgOffsetTop = $(allImages[i]).data("offsetTop");
 		scrollHeightOfElement = ((currentScrollY - imgOffsetTop) * 0.7) - windowHeightReduced + (imgOffsetTop / 20);
 		
-		$(allImages[i]).css("transform", "translateY(" + scrollHeightOfElement + "px)");
+		$(allImages[i]).css("transform", "translateY(" + scrollHeightOfElement + "px) translateZ(0)");
 	}
 }
 
