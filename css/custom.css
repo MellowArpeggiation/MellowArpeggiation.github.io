@@ -26,14 +26,17 @@
 .img-wrapper {
 	height: 25rem;
 	overflow: hidden;
-    position: relative;
 }
 
 .img-wrapper img {
-    position: absolute;
     border-radius: 1rem;
+	
+	/* Performance improvements */
 	will-change: transform;
 	transform: translateZ(0);
+	
+	-webkit-backface-visibility: hidden;
+	perspective: 1000;
 }
 
 .img-wrapper-top {
