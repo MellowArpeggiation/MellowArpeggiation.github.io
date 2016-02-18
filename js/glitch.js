@@ -26,5 +26,5 @@ function swapElegant(element) {
 $(".glitch").each(function () {
 	'use strict';
 	
-	//setInterval(swapElegant, 50, this);
+	setInterval(swapElegant, 50, this);
 });
