@@ -1,135 +1,133 @@
-.u-text-center {
-    text-align: center;
-}
+/* line 1, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
+html {
+  box-sizing: border-box; }
 
+/* line 5, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+/* line 9, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
+.u-text-center {
+  text-align: center; }
+
+/* line 13, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
 .background {
-    height: 100vh;
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, #fff 100%), linear-gradient(70deg, #fdf2c3 32%, #c0eeff); }
+
+/* line 22, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
+.header {
+  height: 100vh;
+  position: relative; }
+  /* line 26, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
+  .header .header-content {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    vertical-align: middle; }
+
+/* line 35, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
+.img-wrapper {
+  height: 25rem;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  display: block; }
+  @media (min-width: 550px) {
+    /* line 35, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
+    .img-wrapper {
+      height: 38rem; } }
+  /* line 45, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
+  .img-wrapper img {
+    border-radius: 1rem;
     width: 100%;
     position: absolute;
-    
-    background-image: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, #fff 100%), linear-gradient(70deg, #fdf2c3 32%, #c0eeff);
-}
-
-.header {
-	height: 100vh;
-	position: relative;
-}
-
-.header-content {
-	position: absolute;
-	width: 100%;
-	top: 50%;
-	transform: translateY(-50%);
-	vertical-align: middle;
-}
-
-.img-wrapper {
-	height: 25rem;
-	overflow: hidden;
-}
-
-.img-wrapper img {
-    border-radius: 1rem;
-	
-	/* Performance improvements */
-	will-change: transform;
-	transform: translateZ(0);
-	
-	-webkit-backface-visibility: hidden; /* iOS prefix */
-	backface-visibility: hidden;
-}
-
-.img-wrapper-top {
+    /* Performance improvements */
+    will-change: transform;
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    /* iOS prefix */
+    backface-visibility: hidden; }
+  /* line 58, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
+  .img-wrapper.top {
     border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
-}
-
-.img-wrapper-bottom {
+    border-top-right-radius: 1rem; }
+  /* line 63, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
+  .img-wrapper.bottom {
     border-bottom-left-radius: 1rem;
-    border-bottom-right-radius: 1rem;
-}
+    border-bottom-right-radius: 1rem; }
 
-.column, .columns {
-	margin-bottom: 2rem;
-}
+/* line 69, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
+.column, .columns, .section {
+  margin-bottom: 2rem; }
 
-.section {
-	margin-bottom: 2rem;
-}
-
+/* line 73, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
 .button, button {
-    width: 100%;
-}
+  width: 100%; }
 
+/* line 77, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
 .chevron-down {
-	border-style: solid;
-	border-width: 0.15em 0.15em 0 0;
-	content: '';
-	display: inline-block;
-	height: 2.5rem;
-	width: 2.5rem;
-	left: calc(50% - 0.75em);
-	position: absolute;
-	bottom: 3rem;
-	transform: rotate(135deg);
-	vertical-align: top;
-	outline: none;
-}
-
-@media (min-width: 550px) {
-	.img-wrapper {
-		height: 38rem
-	}
-}
+  border-style: solid;
+  border-width: 0.15em 0.15em 0 0;
+  content: '';
+  display: inline-block;
+  height: 2.5rem;
+  width: 2.5rem;
+  left: calc(50% - 0.75em);
+  position: absolute;
+  bottom: 3rem;
+  transform: rotate(135deg);
+  vertical-align: top;
+  outline: none; }
 
 /* columns */
 @media (min-width: 550px) {
-    .big.column {
-        width: 74.0%;
-    }
-    .small.column {
-        width: 22%;
-    }
-}
+  /* line 95, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
+  .column.big {
+    width: 74.0%; }
+  /* line 96, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
+  .column.small {
+    width: 22%; } }
+
 @media (min-width: 900px) {
-    .big.column {
-        width: 82.6666666667%;
-    }
-    .small.column {
-        width: 13.3333333333%;
-    }
-}
+  /* line 99, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
+  .column.big {
+    width: 82.6666666667%; }
+  /* line 100, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
+  .column.small {
+    width: 13.3333333333%; } }
 
 /* animations */
-
+/* line 105, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
 .fade-in {
-	animation: fadein 1.5s ease-out;
-}
+  animation: fadein 1.5s ease-out; }
 
+/* line 109, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
 .fade-drop-in {
-	opacity: 0;
-	animation: fadedropin 1.5s ease-out 1.5s forwards;
-}
+  opacity: 0;
+  animation: fadedropin 1.5s ease-out 1.5s forwards; }
 
 @keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
 
 @keyframes fadedropin {
-    from {
-		margin-bottom: 40px;
-		opacity: 0;
-	}
-    to {
-		margin-top: 0;
-		opacity: 1;
-	}
-}
+  from {
+    margin-bottom: 40px;
+    opacity: 0; }
+  to {
+    margin-top: 0;
+    opacity: 1; } }
 
 /* iPhone Safari fix */
 @media (orientation: portrait) {
-	.ios-safari-margin {
-		margin-top: -70px;
-	}
-}
+  /* line 132, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
+  .ios-safari-margin {
+    margin-top: -70px; } }
+
+/*# sourceMappingURL=custom.css.map */
