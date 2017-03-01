@@ -35,7 +35,7 @@ function setImgScroll(currentScrollY) {
 	// Optimised array loop, each is too slow for 60fps
 	for (i = 0; i < allImagesLength; i += 1) {
 		imgOffsetTop = $(allImages[i]).data("offsetTop");
-		scrollHeightOfElement = ((currentScrollY - imgOffsetTop) * 0.7) - windowHeightReduced + (imgOffsetTop / 30);
+		scrollHeightOfElement = ((currentScrollY - imgOffsetTop) * 0.7) - windowHeightReduced + (imgOffsetTop / 40);
 		
 		$(allImages[i]).css("transform", "translateY(" + scrollHeightOfElement + "px) translateZ(0)");
 	}
