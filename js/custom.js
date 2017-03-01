@@ -45,7 +45,7 @@ function setImgScroll(currentScrollY) {
 function fadeDownArrow(currentScrollY) {
 	'use strict';
 	
-	var windowHeightReduced = $(window).height() / 2,
+	var windowHeightReduced = $(window).height() / 3,
 		newOpacity = (windowHeightReduced - currentScrollY) / windowHeightReduced;
 	newOpacity = newOpacity < 0 ? 0 : newOpacity;
 	
