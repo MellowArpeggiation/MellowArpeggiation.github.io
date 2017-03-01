@@ -18,11 +18,13 @@ function scrollSmoothTo(element) {
 }
 
 /** Record the image offset as a data attribute in the image **/
-allImages.each(function (e) {
+function getImageOffsets() {
 	'use strict';
 	
-	$(this).data("offsetTop", $(this).parent().offset().top);
-});
+	allImages.each(function (e) {
+		$(this).data("offsetTop", $(this).parent().offset().top);
+	});
+}
 
 /** Set the image parallax scroll offset **/
 function setImgScroll(currentScrollY) {
@@ -33,7 +35,7 @@ function setImgScroll(currentScrollY) {
 		scrollHeightOfElement,
 		windowHeightReduced = $(window).height() / 8;
 	
-	// Optimised array loop, each is too slow for 60fps
+	// Optimised array loop, forEach() is too slow for 60fps
 	for (i = 0; i < allImagesLength; i += 1) {
 		imgOffsetTop = $(allImages[i]).data("offsetTop");
 		scrollHeightOfElement = (currentScrollY - imgOffsetTop) + (imgOffsetTop - currentScrollY) / scrollCoefficient;
@@ -70,6 +72,16 @@ function animLoop() {
 	}
 }
 
+function init() {
+	'use strict';
+	
+	// Begin the animation loop
+	requestAnimationFrame(animLoop);
+	
+	// Set image offsets
+	getImageOffsets();
+}
+
 /** Fix up the location of the content arrow on iOS Safari.
 	Without this, the user would not get the indication to scroll!
 **/
@@ -86,8 +98,11 @@ $(window).scroll(function () {
 	currentScrollTop = $(window).scrollTop();
 });
 
-// Force browser optimisation
-window.addEventListener("mousewheel", function () { 'use strict'; });
+$(window).resize(function () {
+	'use strict';
+	
+	getImageOffsets();
+});
 
 /** Catch all the different browser implementations of animation end.
 	Then unset the animation rule, to allow Opacity changes
@@ -97,7 +112,6 @@ downArrow.on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", fun
 	
 	$(this).css("animation", "initial");
 });
-
 downArrow.on("animationstart webkitAnimationStart oAnimationStart MSAnimationStart", function () {
 	'use strict';
 
@@ -105,5 +119,8 @@ downArrow.on("animationstart webkitAnimationStart oAnimationStart MSAnimationSta
 	fadeDownArrow(currentScrollTop);
 });
 
-// Begin the animation loop
-requestAnimationFrame(animLoop);
+// Fix Chrome scroll jitter
+window.addEventListener("mousewheel", function () { 'use strict'; }, { passive: true });
+
+// Now we start the execution
+init();
