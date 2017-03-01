@@ -45,6 +45,10 @@ function setImgScroll(currentScrollY) {
 function fadeDownArrow(currentScrollY) {
 	'use strict';
 	
+	if (!downArrow.hasClass("animation-started")) {
+		return;
+	}
+	
 	var windowHeightReduced = $(window).height() / 3,
 		newOpacity = (windowHeightReduced - currentScrollY) / windowHeightReduced;
 	newOpacity = newOpacity < 0 ? 0 : newOpacity;
@@ -90,6 +94,13 @@ downArrow.on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", fun
 	'use strict';
 	
 	$(this).css("animation", "initial");
+});
+
+downArrow.on("animationstart webkitAnimationStart oAnimationStart MSAnimationStart", function () {
+	'use strict';
+
+	$(this).addClass("animation-started");
+	fadeDownArrow(currentScrollTop);
 });
 
 // Begin the animation loop

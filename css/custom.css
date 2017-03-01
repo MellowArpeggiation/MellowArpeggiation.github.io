@@ -108,7 +108,8 @@ html {
 /* line 109, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
 .fade-drop-in {
   opacity: 0;
-  animation: fadedropin 1.5s ease-out 1.5s forwards; }
+  animation: fadedropin 1.5s ease-out 1.5s forwards;
+  transition: opacity 0.1s; }
 
 @keyframes fadein {
   from {
@@ -126,7 +127,7 @@ html {
 
 /* iPhone Safari fix */
 @media (orientation: portrait) {
-  /* line 132, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
+  /* line 133, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
   .ios-safari-margin {
     margin-top: -70px; } }
 
