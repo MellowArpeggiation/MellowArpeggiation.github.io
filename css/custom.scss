@@ -10,6 +10,12 @@ html {
     text-align: center;
 }
 
+.toc-marker {
+	/* Table of contents marker needs to be slightly offset upwards, looks nicer that way */
+	padding-top: 2rem;
+	margin-top: -2rem;
+}
+
 .background {
     height: 100vh;
     width: 100%;
