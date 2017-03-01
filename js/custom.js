@@ -1,13 +1,5 @@
 /*global $, requestAnimationFrame*/
 
-function scrollSmoothTo(element) {
-	'use strict';
-
-	$("html, body").animate({
-		scrollTop: $(element).offset().top
-	}, 1000);
-}
-
 var currentScrollTop = $(window).scrollTop(),
 	oldScrollTop,
 	allImages = $(".img-wrapper img"),
@@ -15,12 +7,23 @@ var currentScrollTop = $(window).scrollTop(),
 	allImagesLength = allImages.length,
 	downArrow = $(".chevron-down");
 
+/** Scroll to any defined element over one second **/
+function scrollSmoothTo(element) {
+	'use strict';
+	
+	$("html, body").animate({
+		scrollTop: $(element).offset().top
+	}, 1000);
+}
+
+/** Record the image offset as a data attribute in the image **/
 allImages.each(function (e) {
 	'use strict';
 	
 	$(this).data("offsetTop", $(this).parent().offset().top);
 });
 
+/** Set the image parallax scroll offset **/
 function setImgScroll(currentScrollY) {
 	'use strict';
 	
@@ -38,6 +41,7 @@ function setImgScroll(currentScrollY) {
 	}
 }
 
+/** Fade out the content arrow depending on where the user is on the page **/
 function fadeDownArrow(currentScrollY) {
 	'use strict';
 	
@@ -48,6 +52,7 @@ function fadeDownArrow(currentScrollY) {
 	downArrow.css("opacity", newOpacity);
 }
 
+/** Highly optimised animation loop, uses requestAnimationFrame for max performance **/
 function animLoop() {
 	'use strict';
 	
@@ -59,10 +64,16 @@ function animLoop() {
 	}
 }
 
+/** Fix up the location of the content arrow on iOS Safari.
+	Without this, the user would not get the indication to scroll!
+**/
 if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
 	$(".header").addClass("ios-safari-margin");
 }
 
+/** Change the page scroll location, this is checked by the animation loop.
+	This prevents a draw call being made for every scroll event, which is expensive
+**/
 $(window).scroll(function () {
 	'use strict';
 	
@@ -72,10 +83,14 @@ $(window).scroll(function () {
 // Force browser optimisation
 window.addEventListener("mousewheel", function () { 'use strict'; });
 
-downArrow.on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function() {
+/** Catch all the different browser implementations of animation end.
+	Then unset the animation rule, to allow Opacity changes
+**/
+downArrow.on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function () {
 	'use strict';
 	
 	$(this).css("animation", "initial");
 });
 
+// Begin the animation loop
 requestAnimationFrame(animLoop);
