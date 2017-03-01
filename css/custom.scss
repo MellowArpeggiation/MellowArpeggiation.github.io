@@ -98,12 +98,12 @@ html {
 /* columns */
 .column {
 	@media (min-width: 550px) {
-		&.big	{ width: 74.0%; }
-		&.small	{ width: 22%; }
+		&.big	{ width: 65.3333333333%; }
+		&.small	{ width: 30.6666666667%; }
 	}
 	@media (min-width: 900px) {
-		&.big	{ width: 82.6666666667%; }
-		&.small	{ width: 13.3333333333%; }
+		&.big	{ width: 74%; }
+		&.small	{ width: 22%; }
 	}
 }
 

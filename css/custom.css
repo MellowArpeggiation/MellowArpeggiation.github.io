@@ -93,18 +93,18 @@ html {
 @media (min-width: 550px) {
   /* line 101, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
   .column.big {
-    width: 74.0%; }
+    width: 65.3333333333%; }
   /* line 102, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
   .column.small {
-    width: 22%; } }
+    width: 30.6666666667%; } }
 
 @media (min-width: 900px) {
   /* line 105, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
   .column.big {
-    width: 82.6666666667%; }
+    width: 74%; }
   /* line 106, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
   .column.small {
-    width: 13.3333333333%; } }
+    width: 22%; } }
 
 /* animations */
 /* line 111, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
