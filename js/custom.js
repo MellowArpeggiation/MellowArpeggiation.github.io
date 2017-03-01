@@ -11,7 +11,9 @@ function scrollSmoothTo(element) {
 var currentScrollTop = $(window).scrollTop(),
 	oldScrollTop,
 	allImages = $(".img-wrapper img"),
-	allImagesLength = allImages.length;
+	// We keep a reference to the length of the array to prevent extra array accesses
+	allImagesLength = allImages.length,
+	downArrow = $(".chevron-down");
 
 allImages.each(function (e) {
 	'use strict';
@@ -27,6 +29,7 @@ function setImgScroll(currentScrollY) {
 		scrollHeightOfElement,
 		windowHeightReduced = $(window).height() / 6;
 	
+	// Optimised array loop, each is too slow for 60fps
 	for (i = 0; i < allImagesLength; i += 1) {
 		imgOffsetTop = $(allImages[i]).data("offsetTop");
 		scrollHeightOfElement = ((currentScrollY - imgOffsetTop) * 0.7) - windowHeightReduced + (imgOffsetTop / 30);
@@ -35,12 +38,23 @@ function setImgScroll(currentScrollY) {
 	}
 }
 
+function fadeDownArrow(currentScrollY) {
+	'use strict';
+	
+	var windowHeightReduced = $(window).height() / 2,
+		newOpacity = (windowHeightReduced - currentScrollY) / windowHeightReduced;
+	newOpacity = newOpacity < 0 ? 0 : newOpacity;
+	
+	downArrow.css("opacity", newOpacity);
+}
+
 function animLoop() {
 	'use strict';
 	
 	requestAnimationFrame(animLoop);
 	if (currentScrollTop !== oldScrollTop) {
 		setImgScroll(currentScrollTop);
+		fadeDownArrow(currentScrollTop);
 		oldScrollTop = currentScrollTop;
 	}
 }
@@ -55,6 +69,13 @@ $(window).scroll(function () {
 	currentScrollTop = $(window).scrollTop();
 });
 
+// Force browser optimisation
 window.addEventListener("mousewheel", function () { 'use strict'; });
+
+downArrow.on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function() {
+	'use strict';
+	
+	$(this).css("animation", "initial");
+});
 
 requestAnimationFrame(animLoop);
