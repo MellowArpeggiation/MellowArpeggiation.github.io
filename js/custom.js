@@ -5,7 +5,8 @@ var currentScrollTop = $(window).scrollTop(),
 	allImages = $(".img-wrapper img"),
 	// We keep a reference to the length of the array to prevent extra array accesses
 	allImagesLength = allImages.length,
-	downArrow = $(".chevron-down");
+	downArrow = $(".chevron-down"),
+	scrollCoefficient = 2.2;
 
 /** Scroll to any defined element over one second **/
 function scrollSmoothTo(element) {
@@ -30,12 +31,12 @@ function setImgScroll(currentScrollY) {
 	var i,
 		imgOffsetTop,
 		scrollHeightOfElement,
-		windowHeightReduced = $(window).height() / 6;
+		windowHeightReduced = $(window).height() / 8;
 	
 	// Optimised array loop, each is too slow for 60fps
 	for (i = 0; i < allImagesLength; i += 1) {
 		imgOffsetTop = $(allImages[i]).data("offsetTop");
-		scrollHeightOfElement = ((currentScrollY - imgOffsetTop) * 0.7) - windowHeightReduced + (imgOffsetTop / 40);
+		scrollHeightOfElement = (currentScrollY - imgOffsetTop) + (imgOffsetTop - currentScrollY) / scrollCoefficient;
 		
 		$(allImages[i]).css("transform", "translateY(" + scrollHeightOfElement + "px) translateZ(0)");
 	}
@@ -51,6 +52,7 @@ function fadeDownArrow(currentScrollY) {
 	
 	var windowHeightReduced = $(window).height() / 3,
 		newOpacity = (windowHeightReduced - currentScrollY) / windowHeightReduced;
+	
 	newOpacity = newOpacity < 0 ? 0 : newOpacity;
 	
 	downArrow.css("opacity", newOpacity);
