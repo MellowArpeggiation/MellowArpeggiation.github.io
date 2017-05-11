@@ -26,6 +26,10 @@ html {
     /* Table of contents marker needs to be slightly offset upwards, page load looks nicer that way */
     padding-top: 2rem;
     margin-top: -2rem;
+    
+    &:focus {
+        outline: none;
+    }
 }
 
 .background {
