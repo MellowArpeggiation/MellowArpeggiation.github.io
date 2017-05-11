@@ -75,21 +75,22 @@ function init() {
     
     // Get all non empty hash links and attach scroll
     $('a[href*="#"]').not('[href="#"]').not('[href="#0"]').click(function (event) {
-        console.log("click!");
         if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') &&
                 location.hostname === this.hostname) {
-            var target = $(this.hash);
+            var hash = this.hash,
+                target = $(hash);
+            
             target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
             if (target.length) {
                 // Prevent default browser behaviour
                 event.preventDefault();
-                location.hash = this.hash;
                 // Scroll for scrollTime to the marker
                 $('html, body').animate({
                     scrollTop: target.offset().top
                 }, scrollTime, function () {
                     // After animation finishes, set focus
                     // Reimplements default browser behaviour
+                    location.hash = hash;
                     var $target = $(target);
                     $target.focus();
                     if ($target.is(":focus")) {
