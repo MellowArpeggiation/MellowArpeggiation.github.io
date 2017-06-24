@@ -1,46 +1,63 @@
-/*global $, requestAnimationFrame*/
-
 var currentScrollTop = $(window).scrollTop(),
     oldScrollTop,
-    allImages = $(".img-wrapper img"),
+    allWrappers = $('.img-wrapper'),
+    allImages = $('.img-wrapper img'),
     // We keep a reference to the length of the array to prevent extra array accesses
     allImagesLength = allImages.length,
-    downArrow = $(".chevron-down"),
+    // We also store the image offsets as they stay the same
+    allImagesOffsets = [],
+    downArrow = $('.chevron-down'),
     scrollCoefficient = 2.2,
     scrollTime = 1000;
 
-/** Record the image offset as a data attribute in the image **/
+/**
+ * @desc Record the image offset as a data attribute in the image
+ */
 function getImageOffsets() {
     'use strict';
 
-    allImages.each(function (e) {
-        $(this).data("offsetTop", $(this).parent().offset().top);
+    allImages.each(function () {
+        allImagesOffsets.push($(this).parent().offset().top);
     });
+    
 }
 
-/** Set the image parallax scroll offset **/
+/**
+ * @desc Set the image parallax scroll offset
+ * @param {Number} currentScrollY - The current scroll offset from the top
+ */
 function setImgScroll(currentScrollY) {
     'use strict';
 
-    var i,
-        imgOffsetTop,
-        scrollHeightOfElement,
-        windowHeightReduced = $(window).height() / 8;
-
     // Optimised array loop, forEach() is too slow for 60fps
-    for (i = 0; i < allImagesLength; i += 1) {
-        imgOffsetTop = $(allImages[i]).data("offsetTop");
-        scrollHeightOfElement = (currentScrollY - imgOffsetTop) + (imgOffsetTop - currentScrollY) / scrollCoefficient;
+    for (var i = 0; i < allImagesLength; i += 1) {
+        var wrapper = allWrappers[i],
+            boundingRect = wrapper.getBoundingClientRect();
 
-        $(allImages[i]).css("transform", "translateY(" + scrollHeightOfElement + "px) translateZ(0)");
+        // Check if onscreen
+        if (boundingRect.bottom < 0 || boundingRect.top > window.innerHeight) {
+            continue;
+        }
+
+        // Get new parallax offset
+        var image = allImages[i],
+            imgOffsetTop = allImagesOffsets[i],
+            scrollHeightOfElement = (currentScrollY - imgOffsetTop) + (imgOffsetTop - currentScrollY) / scrollCoefficient;
+
+        // Set image transform
+        image.style.transform = 'translateY(' + scrollHeightOfElement + 'px) translateZ(0)';
+        //$image.css('transform', 'translateY(' + scrollHeightOfElement + 'px) translateZ(0)');
     }
 }
 
-/** Fade out the content arrow depending on where the user is on the page **/
+/**
+ * @desc Fade out the content arrow depending on where the user is on the page
+ * @param {Number} currentScrollY - The current scroll offset from the top
+ */
 function fadeDownArrow(currentScrollY) {
     'use strict';
 
-    if (!downArrow.hasClass("animation-started")) {
+    if (!downArrow.hasClass('animation-started')) {
         return;
     }
 
@@ -49,14 +66,18 @@ function fadeDownArrow(currentScrollY) {
 
     newOpacity = newOpacity < 0 ? 0 : newOpacity;
 
-    downArrow.css("opacity", newOpacity);
+    downArrow.css('opacity', newOpacity);
 }
 
-/** Highly optimised animation loop, uses requestAnimationFrame for max performance **/
+/**
+ * @desc Highly optimised animation loop, uses requestAnimationFrame for max performance
+ */
 function animLoop() {
     'use strict';
 
+    // Call this function once every frame
     requestAnimationFrame(animLoop);
+
     if (currentScrollTop !== oldScrollTop) {
         setImgScroll(currentScrollTop);
         fadeDownArrow(currentScrollTop);
@@ -75,25 +96,25 @@ function init() {
     
     // Get all non empty hash links and attach scroll
     $('a[href*="#"]').not('[href="#"]').not('[href="#0"]').click(function (event) {
-        if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') &&
-                location.hostname === this.hostname) {
+        var pathEquivalent = location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, ''),
+            hostEquivalent = location.hostname === this.hostname;
+        if (pathEquivalent && hostEquivalent) {
             var hash = this.hash,
-                target = $(hash);
+                $target = $(hash);
             
-            target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-            if (target.length) {
+            $target = $target.length ? $target : $('[name=' + this.hash.slice(1) + ']');
+            if ($target.length) {
                 // Prevent default browser behaviour
                 event.preventDefault();
                 // Scroll for scrollTime to the marker
                 $('html, body').animate({
-                    scrollTop: target.offset().top
+                    scrollTop: $target.offset().top
                 }, scrollTime, function () {
                     // After animation finishes, set focus
                     // Reimplements default browser behaviour
                     location.hash = hash;
-                    var $target = $(target);
                     $target.focus();
-                    if ($target.is(":focus")) {
+                    if ($target.is(':focus')) {
                         return false;
                     } else {
                         $target.attr('tabindex', '-1');
@@ -109,7 +130,7 @@ function init() {
 	Without this, the user would not get the indication to scroll!
 **/
 if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
-    $(".header").addClass("ios-safari-margin");
+    $('.header').addClass('ios-safari-margin');
 }
 
 /** Change the page scroll location, this is checked by the animation loop.
@@ -130,20 +151,20 @@ $(window).resize(function () {
 /** Catch all the different browser implementations of animation end.
 	Then unset the animation rule, to allow Opacity changes
 **/
-downArrow.on("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function () {
+downArrow.on('animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd', function () {
     'use strict';
 
-    $(this).css("animation", "initial");
+    $(this).css('animation', 'initial');
 });
-downArrow.on("animationstart webkitAnimationStart oAnimationStart MSAnimationStart", function () {
+downArrow.on('animationstart webkitAnimationStart oAnimationStart MSAnimationStart', function () {
     'use strict';
 
-    $(this).addClass("animation-started");
+    $(this).addClass('animation-started');
     fadeDownArrow(currentScrollTop);
 });
 
 // Fix Chrome scroll jitter
-window.addEventListener("mousewheel", function () {
+window.addEventListener('mousewheel', function () {
     'use strict';
 }, {
     passive: true
