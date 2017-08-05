@@ -45,8 +45,7 @@ function setImgScroll(currentScrollY) {
             scrollHeightOfElement = (currentScrollY - imgOffsetTop) + (imgOffsetTop - currentScrollY) / scrollCoefficient;
 
         // Set image transform
-        image.style.transform = 'translateY(' + scrollHeightOfElement + 'px) translateZ(0)';
-        //$image.css('transform', 'translateY(' + scrollHeightOfElement + 'px) translateZ(0)');
+        image.style.transform = 'translate3d(0px, ' + scrollHeightOfElement + 'px, 0px)';
     }
 }
 
