@@ -60,7 +60,7 @@ header, .header {
     }
     
     overflow: hidden;
-    position: relative;
+    // position: relative;
     z-index: 1;
     display: block;
     contain: strict;
@@ -68,13 +68,11 @@ header, .header {
     img {
         border-radius: 1rem;
         width: 100%;
-        position: absolute;
+        // position: absolute;
         
         /* Performance improvements */
         will-change: transform;
         overflow: hidden;
-        top: 0;
-        left: 0;
         contain: strict;
         pointer-events: none;
         
