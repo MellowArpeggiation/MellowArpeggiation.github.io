@@ -1,94 +1,99 @@
 /* Border box fix */
-/* line 3, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
 html {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+}
 
-/* line 7, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
 *, *:before, *:after {
-  box-sizing: inherit; }
+  box-sizing: inherit;
+}
 
 /* Utilities */
-/* line 14, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
 .u-text-center {
-  text-align: center; }
+  text-align: center;
+}
 
 /* Content */
-/* line 21, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
 .text-muted {
-  color: #999; }
+  color: #999;
+}
 
-/* line 25, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
 .toc-marker {
   /* Table of contents marker needs to be slightly offset upwards, page load looks nicer that way */
   padding-top: 2rem;
-  margin-top: -2rem; }
-  /* line 30, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
-  .toc-marker:focus {
-    outline: none; }
+  margin-top: -2rem;
+}
+.toc-marker:focus {
+  outline: none;
+}
 
-/* line 35, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
 .background {
   height: 100vh;
   width: 100%;
   position: absolute;
-  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, #fff 100%), linear-gradient(70deg, #fdf2c3 32%, #c0eeff); }
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, #fff 100%), linear-gradient(70deg, #fdf2c3 32%, #c0eeff);
+}
 
-/* line 42, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
 header, .header {
   height: 100vh;
-  position: relative; }
-  /* line 46, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
-  header .header-content, .header .header-content {
-    position: absolute;
-    width: 100%;
-    top: 50%;
-    transform: translateY(-50%);
-    vertical-align: middle; }
+  position: relative;
+}
+header .header-content, .header .header-content {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  vertical-align: middle;
+}
 
-/* line 55, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
 .img-wrapper {
   height: 25rem;
   overflow: hidden;
   position: relative;
   z-index: 1;
-  display: block; }
-  @media (min-width: 550px) {
-    /* line 55, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
-    .img-wrapper {
-      height: 38rem; } }
-  /* line 67, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
-  .img-wrapper img {
-    border-radius: 1rem;
-    width: 100%;
-    position: absolute;
-    /* Performance improvements */
-    will-change: transform;
-    transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden; }
-  /* line 80, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
-  .img-wrapper.top {
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem; }
-  /* line 85, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
-  .img-wrapper.bottom {
-    border-bottom-left-radius: 1rem;
-    border-bottom-right-radius: 1rem; }
+  display: block;
+  contain: strict;
+}
+@media (min-width: 550px) {
+  .img-wrapper {
+    height: 38rem;
+  }
+}
+.img-wrapper img {
+  border-radius: 1rem;
+  width: 100%;
+  position: absolute;
+  /* Performance improvements */
+  will-change: transform;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  contain: strict;
+  pointer-events: none;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.img-wrapper.top {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+.img-wrapper.bottom {
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
 
-/* line 91, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
 .column, .columns,
 section, .section {
-  margin-bottom: 2rem; }
+  margin-bottom: 2rem;
+}
 
-/* line 96, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
 .button, button {
-  width: 100%; }
+  width: 100%;
+}
 
-/* line 100, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
 .chevron-down {
   border-style: solid;
   border-width: 0.15em 0.15em 0 0;
-  content: '';
+  content: "";
   display: inline-block;
   height: 2.5rem;
   width: 2.5rem;
@@ -97,99 +102,104 @@ section, .section {
   bottom: 3rem;
   transform: rotate(135deg);
   vertical-align: top;
-  outline: none; }
+  outline: none;
+}
 
 /* code blocks */
-/* line 116, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
 .code-block {
   background: #fdfdfd;
   overflow: auto;
   width: auto;
   border: solid #535353;
-  border-width: .1em .1em .1em .8em;
-  padding: .2em .6em;
-  font-size: 1.1rem; }
-  /* line 126, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
-  .code-block pre {
-    margin: 0;
-    line-height: 125%; }
-    /* line 130, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
-    .code-block pre .comment {
-      color: #949494; }
-    /* line 134, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
-    .code-block pre .comment-highlight {
-      color: #d42; }
-    /* line 138, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
-    .code-block pre .variable {
-      color: #8757ad; }
-    /* line 143, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
-    .code-block pre .literal.string {
-      color: #e88501; }
-    /* line 147, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
-    .code-block pre .literal.boolean {
-      color: #446fbd; }
-    /* line 152, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
-    .code-block pre .keyword {
-      color: #446fbd;
-      font-weight: bold; }
-    /* line 161, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
-    .code-block pre .option {
-      color: #aaa; }
-    /* line 165, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
-    .code-block pre .function {
-      color: #6d8600;
-      font-weight: bold; }
-    /* line 170, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
-    .code-block pre .snapin-reference {
-      color: #036;
-      font-weight: bold; }
+  border-width: 0.1em 0.1em 0.1em 0.8em;
+  padding: 0.2em 0.6em;
+  font-size: 1.1rem;
+}
+.code-block pre {
+  margin: 0;
+  line-height: 125%;
+}
+.code-block pre .comment {
+  color: #949494;
+}
+.code-block pre .comment-highlight {
+  color: #d42;
+}
+.code-block pre .variable {
+  color: #8757ad;
+}
+.code-block pre .literal.string {
+  color: #e88501;
+}
+.code-block pre .literal.boolean {
+  color: #446fbd;
+}
+.code-block pre .keyword {
+  color: #446fbd;
+  font-weight: bold;
+}
+.code-block pre .option {
+  color: #aaa;
+}
+.code-block pre .function {
+  color: #6d8600;
+  font-weight: bold;
+}
+.code-block pre .snapin-reference {
+  color: #036;
+  font-weight: bold;
+}
 
 /* columns */
 @media (min-width: 550px) {
-  /* line 182, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
   .column.big {
-    width: 65.3333333333%; }
-  /* line 185, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
+    width: 65.3333333333%;
+  }
   .column.small {
-    width: 30.6666666667%; } }
-
+    width: 30.6666666667%;
+  }
+}
 @media (min-width: 900px) {
-  /* line 190, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
   .column.big {
-    width: 74%; }
-  /* line 193, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
+    width: 74%;
+  }
   .column.small {
-    width: 22%; } }
+    width: 22%;
+  }
+}
 
 /* animations */
-/* line 202, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
 .fade-in {
-  animation: fadein 1.5s ease-out; }
+  animation: fadein 1.5s ease-out;
+}
 
-/* line 206, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
 .fade-drop-in {
   opacity: 0;
   animation: fadedropin 1.5s ease-out 1.5s forwards;
-  transition: opacity 0.1s; }
+  transition: opacity 0.1s;
+}
 
 @keyframes fadein {
   from {
-    opacity: 0; }
+    opacity: 0;
+  }
   to {
-    opacity: 1; } }
-
+    opacity: 1;
+  }
+}
 @keyframes fadedropin {
   from {
     margin-bottom: 40px;
-    opacity: 0; }
+    opacity: 0;
+  }
   to {
     margin-top: 0;
-    opacity: 1; } }
-
+    opacity: 1;
+  }
+}
 /* iPhone Safari fix */
 @media (orientation: portrait) {
-  /* line 236, C:/Users/gpaton/Documents/GitHub/MellowArpeggiation.github.io/css/custom.scss */
   .ios-safari-margin {
-    margin-top: -70px; } }
-
-/*# sourceMappingURL=custom.css.map */
+    margin-top: -70px;
+  }
+}

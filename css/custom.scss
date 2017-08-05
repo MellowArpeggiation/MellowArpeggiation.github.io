@@ -63,6 +63,7 @@ header, .header {
     position: relative;
     z-index: 1;
     display: block;
+    contain: strict;
     
     img {
         border-radius: 1rem;
@@ -71,7 +72,11 @@ header, .header {
         
         /* Performance improvements */
         will-change: transform;
-        transform: translateZ(0);
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        contain: strict;
+        pointer-events: none;
         
         -webkit-backface-visibility: hidden;
                 backface-visibility: hidden;
