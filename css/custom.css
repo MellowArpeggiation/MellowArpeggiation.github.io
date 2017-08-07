@@ -48,6 +48,7 @@ header .header-content, .header .header-content {
 .img-wrapper {
   height: 25rem;
   overflow: hidden;
+  position: relative;
   z-index: 1;
   display: block;
   contain: strict;
@@ -60,7 +61,7 @@ header .header-content, .header .header-content {
 .img-wrapper img {
   border-radius: 1rem;
   width: 100%;
-  position: fixed;
+  position: absolute;
   /* Performance improvements */
   will-change: transform;
   overflow: hidden;
