@@ -18,6 +18,8 @@
      * @desc Record the image offset as a data attribute in the image
      */
     function getImageOffsets() {
+        allImagesOffsets = [];
+
         $allImages.each(function () {
             allImagesOffsets.push($(this).parent().offset().top);
         });
