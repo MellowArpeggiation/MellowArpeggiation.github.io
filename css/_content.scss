@@ -75,18 +75,45 @@ section, .section {
     margin-bottom: 2rem;
 }
 
+// .chevron-down {
+//     border-style: solid;
+//     border-width: 0.15em 0.15em 0 0;
+//     display: inline-block;
+//     height: 2.5rem;
+//     width: 2.5rem;
+//     left: calc(50% - 0.75em);
+//     position: absolute;
+//     bottom: 15vh;
+//     transform: rotate(135deg);
+//     vertical-align: top;
+//     outline: none;
+// }
+
 .chevron-down {
-    border-style: solid;
-    border-width: 0.15em 0.15em 0 0;
-    display: inline-block;
-    height: 2.5rem;
-    width: 2.5rem;
-    left: calc(50% - 0.75em);
+    display: block;
     position: absolute;
+
     bottom: 15vh;
-    transform: rotate(135deg);
-    vertical-align: top;
+    height: 6rem;
+    width: 6rem;
+    left: 50%;
+    transform: translateX(-50%);
+
     outline: none;
+
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+
+        left: 1.8rem;
+        top: 0.8rem;
+        height: 2.5rem;
+        width: 2.5rem;
+        border-style: solid;
+        border-width: 0.2rem 0.2rem 0 0;
+        transform: rotate(135deg);
+    }
 }
 
 .link-effect {
@@ -95,7 +122,6 @@ section, .section {
 
     &::after {
         content: '';
-
         position: absolute;
 
         top: 100%;
