@@ -1,7 +1,8 @@
 /* Code blocks */
 
 .code-block {
-    background: #fdfdfd; // Fox only
+    // background: #fdfdfd; // Fox only
+    background: #272822;
     overflow: auto;
     width: auto;
     border: solid #535353;
@@ -9,50 +10,61 @@
     padding: .2em .6em;
     
     font-size: 1.1rem;
+
+    table {
+        margin-bottom: 0;
+        td, th {
+            border-bottom: none;
+        }
+    }
     
     pre {
         margin: 0;
         line-height: 125%;
+        color: #f8f8f2;
+
+        &.line-numbers {
+            color: #90908a;
+        }
         
         .comment {
-            color: #949494;
+            color: #75715e;
         }
         
         .comment-highlight {
-            color: #d42;
+            color: #a6e22e;
         }
         
         .variable {
-            color: #8757ad;
+            color: #66d9ef;
         }
         
         .literal {
             &.string {
-                color: #e88501;
+                color: #e6db74;
             }
             
             &.boolean {
-                color: #446fbd;
+                color: #ae81ff;
             }
         }
         
         .keyword {
-            color: #446fbd;
+            color: #f92672;
             font-weight: bold;
         }
         
         .option {
-            color: #aaa;
+            color: #f92672;
         }
         
         .function {
-            color: #6d8600;
+            color: #a6e22e;
             font-weight: bold;
         }
         
         .snapin-reference {
-            color: #036;
-            font-weight: bold;
+            color: #a6e22e;
         }
     }
 }
