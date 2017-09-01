@@ -15,9 +15,9 @@
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Raleway:400,300,600" />
 
     <!-- CSS -->
-    <link rel="stylesheet" href="css/normalize.css" />
-    <link rel="stylesheet" href="css/skeleton.css" />
-    <link rel="stylesheet" href="css/custom.css" />
+    <link rel="stylesheet" href="css/normalize.min.css" />
+    <link rel="stylesheet" href="css/skeleton.min.css" />
+    <link rel="stylesheet" href="css/custom.min.css" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/favicon.png">
@@ -31,9 +31,9 @@
         <header>
             <div class="header-content">
                 <h1>Powershell</h1>
-                <ul>
-                    <li><a href="#outlook-signatures">Set Outlook 2013/2016 Signatures</a></li>
-                    <li><a href="#fix-sp-themes">Repair SharePoint apps after theme change</a></li>
+                <ul style="padding-bottom: 1px;"><!-- pixel offset to stop odd rendering bug -->
+                    <li><a class="link-effect" href="#outlook-signatures">Set Outlook 2013/2016 Signatures</a></li>
+                    <li><a class="link-effect" href="#fix-sp-themes">Repair SharePoint apps after theme change</a></li>
                 </ul>
             </div>
             <a href="#content">
@@ -1070,8 +1070,8 @@ ExitGracefully
     
     <!-- SCRIPT -->
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-    <script src="js/polyfill.js"></script>
-    <script src="js/custom.js"></script>
+    <script src="js/polyfill.min.js"></script>
+    <script src="js/custom.min.js"></script>
 </body>
 
 </html>

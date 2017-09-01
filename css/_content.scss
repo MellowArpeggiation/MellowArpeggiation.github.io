@@ -93,7 +93,7 @@ section, .section {
     position: relative;
     text-decoration: none;
 
-    &::before {
+    &::after {
         content: '';
 
         position: absolute;
@@ -106,12 +106,12 @@ section, .section {
         content: '';
         opacity: 0;
         transition: opacity 0.3s, transform 0.3s;
-        transform: translateY(6px);
+        transform: translateY(0.6rem);
     }
 
-    &:hover::before {
+    &:hover::after {
         opacity: 1;
-        transform: translateY(0px);
+        transform: translateY(0);
     }
 }
 
