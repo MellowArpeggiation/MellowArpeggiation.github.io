@@ -121,20 +121,13 @@
         });
     }
 
-    /** Fix up the location of the content arrow on iOS Safari.
-        Without this, the user would not get the indication to scroll!
-    **/
-    if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
-        $('.header').addClass('ios-safari-margin');
-    }
-
     $(window).resize(function () {
         getImageOffsets();
     });
 
     /** Catch all the different browser implementations of animation end.
-        Then unset the animation rule, to allow Opacity changes
-    **/
+     * Then unset the animation rule, to allow Opacity changes
+     */
     $downArrow.on('animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd', function () {
         $(this).css('animation', 'initial');
     });

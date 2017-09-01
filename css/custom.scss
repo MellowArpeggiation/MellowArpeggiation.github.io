@@ -63,7 +63,6 @@ header, .header {
     position: relative;
     z-index: 1;
     display: block;
-    contain: strict;
     
     img {
         border-radius: 1rem;
@@ -73,7 +72,6 @@ header, .header {
         /* Performance improvements */
         will-change: transform;
         overflow: hidden;
-        contain: strict;
         pointer-events: none;
         
         -webkit-backface-visibility: hidden;
@@ -109,7 +107,7 @@ section, .section {
     width: 2.5rem;
     left: calc(50% - 0.75em);
     position: absolute;
-    bottom: 3rem;
+    bottom: 20vh;
     transform: rotate(135deg);
     vertical-align: top;
     outline: none;
@@ -155,10 +153,6 @@ section, .section {
         .keyword {
             color: #446fbd;
             font-weight: bold;
-        }
-        
-        .colon {
-            
         }
         
         .option {
@@ -229,14 +223,5 @@ section, .section {
     to {
         margin-top: 0;
         opacity: 1;
-    }
-}
-
-
-/* iPhone Safari fix */
-
-@media (orientation: portrait) {
-    .ios-safari-margin {
-        margin-top: -70px;
     }
 }
