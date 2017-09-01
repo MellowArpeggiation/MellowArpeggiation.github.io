@@ -141,6 +141,27 @@
         passive: true
     });
 
+    // Prepare the fancy source buttons
+    $('.button-source').each(function () {
+        var $item = $(this);
+        var lines = [
+            Math.random() * 100,
+            Math.random() * 100,
+            Math.random() * 100,
+            Math.random() * 100,
+            Math.random() * 100,
+            Math.random() * 100,
+            Math.random() * 100
+        ].map(function (value) {
+            return '<div style="width:' + value + '%;"></div>';
+        });
+        
+        // Add the first 6 lines to the end, so it loops smoothly
+        lines.push(lines.slice(0, 5).join(''));
+
+        $item.prepend('<div class="source-lines">' + lines.join('') + '</div>');
+    });
+
     // Now we start the execution
     // Since we tail load the JS, we don't have to wait for the page
     init();

@@ -29,3 +29,12 @@
         opacity: 1;
     }
 }
+
+@keyframes scroll {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-84px);
+    }
+}
