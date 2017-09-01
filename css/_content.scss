@@ -117,21 +117,14 @@ section, .section {
 
 .button, button {
     width: 100%;
+    position: relative;
+    overflow: hidden;
 
     @media (max-width: 549px) {
         height: 50px;
         line-height: 50px;
         font-size: 13px;
     }
-}
-
-.button-source,
-.button-demo,
-.button-download,
-.button-read,
-.button-view {
-    position: relative;
-    overflow: hidden;
 }
 
 .button-source {
