@@ -162,7 +162,8 @@ section, .section {
 
 .button-demo,
 .button-read,
-.button-view {
+.button-view,
+.button-download {
     &::before {
         content: '';
         display: block;
@@ -171,13 +172,29 @@ section, .section {
         border-width: 0.15em 0.15em 0 0;
         height: 1rem;
         width: 1rem;
-        right: 1rem;
         top: 50%;
-        transform: translate(2rem, -50%) rotate(45deg);
         transition: transform 0.3s;
     }
+}
 
+.button-demo,
+.button-read,
+.button-view {
+    &::before {
+        right: 1rem;
+        transform: translate(2rem, -50%) rotate(45deg);
+    }
     &:hover::before {
         transform: translate(0, -50%) rotate(45deg);
+    }
+}
+
+.button-download {
+    &::before {
+        left: 1rem;
+        transform: translate(-2.2rem, -75%) rotate(135deg);
+    }
+    &:hover::before {
+        transform: translate(0, -75%) rotate(135deg);
     }
 }
