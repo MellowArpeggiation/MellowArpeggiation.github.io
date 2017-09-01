@@ -1,0 +1,58 @@
+/* Code blocks */
+
+.code-block {
+    background: #fdfdfd; // Fox only
+    overflow: auto;
+    width: auto;
+    border: solid #535353;
+    border-width: .1em .1em .1em .8em;
+    padding: .2em .6em;
+    
+    font-size: 1.1rem;
+    
+    pre {
+        margin: 0;
+        line-height: 125%;
+        
+        .comment {
+            color: #949494;
+        }
+        
+        .comment-highlight {
+            color: #d42;
+        }
+        
+        .variable {
+            color: #8757ad;
+        }
+        
+        .literal {
+            &.string {
+                color: #e88501;
+            }
+            
+            &.boolean {
+                color: #446fbd;
+            }
+        }
+        
+        .keyword {
+            color: #446fbd;
+            font-weight: bold;
+        }
+        
+        .option {
+            color: #aaa;
+        }
+        
+        .function {
+            color: #6d8600;
+            font-weight: bold;
+        }
+        
+        .snapin-reference {
+            color: #036;
+            font-weight: bold;
+        }
+    }
+}

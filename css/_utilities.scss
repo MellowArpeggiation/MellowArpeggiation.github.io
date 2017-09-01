@@ -1,0 +1,13 @@
+/* Utilities */
+
+// Border-box styling
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+.u-text-center {
+    text-align: center;
+}
