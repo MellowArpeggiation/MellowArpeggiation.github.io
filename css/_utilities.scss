@@ -11,3 +11,15 @@ html {
 .u-text-center {
     text-align: center;
 }
+
+.u-hidden-mobile {
+    @media (max-width: 549px) {
+        display: none;
+    }
+}
+
+.u-visible-mobile {
+    @media (min-width: 550px) {
+        display: none;
+    }
+}
