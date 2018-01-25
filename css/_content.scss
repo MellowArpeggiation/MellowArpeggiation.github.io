@@ -1,14 +1,10 @@
-/* Content */
+// Content
 
 .text-muted {
     color: #999;
 }
 
 .toc-marker {
-    /* Table of contents marker needs to be slightly offset upwards, page load looks nicer that way */
-    padding-top: 2rem;
-    margin-top: -2rem;
-    
     &:focus {
         outline: none;
     }
@@ -44,13 +40,22 @@ header, .header {
     position: relative;
     z-index: 1;
     display: block;
+
+    border: solid thin #dfdfdf;
+
+    transition: border 0.2s, box-shadow 0.2s;
+
+    &:hover {
+        border-color: #ccc;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        z-index: 2;
+    }
     
     img {
-        border-radius: 1rem;
         width: 100%;
         position: absolute;
         
-        /* Performance improvements */
+        // Performance improvements
         will-change: transform;
         overflow: hidden;
         pointer-events: none;
@@ -59,35 +64,32 @@ header, .header {
                 backface-visibility: hidden;
     }
     
-    &.top {
-        border-top-left-radius: 1rem;
-        border-top-right-radius: 1rem;
-    }
-    
-    &.bottom {
-        border-bottom-left-radius: 1rem;
-        border-bottom-right-radius: 1rem;
+    @media (min-width: 550px) {
+        &.top {
+            border-top-left-radius: 1rem;
+            border-top-right-radius: 1rem;
+        }
+        
+        &.bottom {
+            border-bottom-left-radius: 1rem;
+            border-bottom-right-radius: 1rem;
+        }
+
+        .row + .row & {
+            border-top: none;
+        }
     }
 }
 
-.column, .columns,
 section, .section {
-    margin-bottom: 2rem;
+    margin-top: 4rem;
 }
 
-// .chevron-down {
-//     border-style: solid;
-//     border-width: 0.15em 0.15em 0 0;
-//     display: inline-block;
-//     height: 2.5rem;
-//     width: 2.5rem;
-//     left: calc(50% - 0.75em);
-//     position: absolute;
-//     bottom: 15vh;
-//     transform: rotate(135deg);
-//     vertical-align: top;
-//     outline: none;
-// }
+.row {
+    @media (max-width: 549px) {
+        margin-bottom: 4rem;
+    }
+}
 
 .chevron-down {
     display: block;
@@ -141,7 +143,7 @@ section, .section {
     }
 }
 
-.button, button {
+button, .button {
     width: 100%;
     position: relative;
     overflow: hidden;
