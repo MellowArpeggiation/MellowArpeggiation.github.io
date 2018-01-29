@@ -114,7 +114,13 @@ section, .section {
         width: 2.5rem;
         border-style: solid;
         border-width: 0.2rem 0.2rem 0 0;
-        transform: rotate(135deg);
+
+        transition: transform 0.3s;
+        transform: translateY(0) rotate(135deg);
+    }
+
+    &:hover::before {
+        transform: translateY(10px) rotate(135deg);
     }
 }
 
