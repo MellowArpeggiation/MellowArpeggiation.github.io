@@ -32,10 +32,6 @@ header, .header {
 .img-wrapper {
     height: 25rem;
     
-    @media (min-width: 550px) {
-        height: 38rem
-    }
-    
     overflow: hidden;
     position: relative;
     z-index: 1;
@@ -65,6 +61,8 @@ header, .header {
     }
     
     @media (min-width: 550px) {
+        height: 38rem;
+
         &.top {
             border-top-left-radius: 1rem;
             border-top-right-radius: 1rem;
@@ -78,6 +76,11 @@ header, .header {
         .row + .row & {
             border-top: none;
         }
+    }
+
+    @media (max-width: 549px) {
+        margin: 0 calc(50% - 50vw);
+        width: 100vw;
     }
 }
 
