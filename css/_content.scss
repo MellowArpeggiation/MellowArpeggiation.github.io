@@ -79,6 +79,8 @@ header, .header {
     }
 
     @media (max-width: 549px) {
+        border-left: none;
+        border-right: none;
         margin: 0 calc(50% - 50vw);
         width: 100vw;
     }
