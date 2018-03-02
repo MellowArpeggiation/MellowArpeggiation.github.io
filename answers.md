@@ -12,6 +12,8 @@ if ($(value1).is($(value2))) {
 }
 ```
 
+_(gp: Maybe add something about the "Direct comparisons against `undefined` are troublesome as `undefined` can be overwritten" guy)_
+
 ## Yahoo answers
 ```js
 value1 =value2
