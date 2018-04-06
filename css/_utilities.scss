@@ -12,6 +12,16 @@ html {
     text-align: center;
 }
 
+.u-text-center-desktop {
+    @media(min-width: 550px) {
+        text-align: center;
+    }
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}
+
 .u-hidden-mobile {
     @media (max-width: 549px) {
         display: none;

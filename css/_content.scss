@@ -64,13 +64,13 @@ header, .header {
         height: 38rem;
 
         &.top {
-            border-top-left-radius: 1rem;
-            border-top-right-radius: 1rem;
+            border-top-left-radius: 4rem;
+            border-top-right-radius: 4rem;
         }
         
         &.bottom {
-            border-bottom-left-radius: 1rem;
-            border-bottom-right-radius: 1rem;
+            border-bottom-left-radius: 4rem;
+            border-bottom-right-radius: 4rem;
         }
 
         .row + .row & {
