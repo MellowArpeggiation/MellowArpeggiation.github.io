@@ -109,6 +109,12 @@ section, .section {
 
     outline: none;
 
+    // Custom focus style, since the outline is square
+    &:focus {
+        background-color: rgba(0, 0, 0, 0.1);
+        opacity: 1 !important;
+    }
+
     &::before {
         content: '';
         display: block;
