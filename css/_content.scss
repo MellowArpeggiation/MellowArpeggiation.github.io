@@ -14,13 +14,13 @@
     height: 100vh;
     width: 100%;
     position: absolute;
-    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, #fff 100%), linear-gradient(70deg, #fdf2c3 32%, #c0eeff);
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, #fff 100%), linear-gradient(70deg, #ffe267 32%, #de79ff);
 }
 
 header, .header {
     height: 100vh;
     position: relative;
-    
+
     .header-content {
         position: absolute;
         width: 100%;
@@ -31,7 +31,7 @@ header, .header {
 
 .img-wrapper {
     height: 25rem;
-    
+
     overflow: hidden;
     position: relative;
     z-index: 1;
@@ -46,20 +46,20 @@ header, .header {
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         z-index: 2;
     }
-    
+
     img {
         width: 100%;
         position: absolute;
-        
+
         // Performance improvements
         will-change: transform;
         overflow: hidden;
         pointer-events: none;
-        
+
         -webkit-backface-visibility: hidden;
                 backface-visibility: hidden;
     }
-    
+
     @media (min-width: 550px) {
         height: 38rem;
 
@@ -67,7 +67,7 @@ header, .header {
             border-top-left-radius: 4rem;
             border-top-right-radius: 4rem;
         }
-        
+
         &.bottom {
             border-bottom-left-radius: 4rem;
             border-bottom-right-radius: 4rem;
@@ -102,7 +102,7 @@ section, .section {
 
     bottom: 15vh;
     height: 8rem;
-    width: 8rem;    
+    width: 8rem;
     left: 50%;
     border-radius: 50%;
     transform: translateX(-50%);
