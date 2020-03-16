@@ -17,7 +17,8 @@
         currentSquish = 0,
         squishDamping = 0.8,
         skewReduction = 50,
-        translationBoost = 8;
+        translationBoost = 8,
+        reducedMotionEnabled;
 
     /**
      * @desc Record the image offset as a data attribute in the image
@@ -37,6 +38,8 @@
      * @param {Number} currentScrollY - The current scroll offset from the top
      */
     function setImgScroll(currentScrollY) {
+        if (reducedMotionEnabled) return;
+
         // Optimised array loop, forEach() is too slow for 60fps
         for (var i = 0; i < allImagesLength; i += 1) {
             var wrapper = $allWrappers[i],
@@ -86,6 +89,7 @@
      * @param {Number} currentScrollDelta - The delta of the current scroll, 0 when no scrolling occurred this frame
      */
     function scrollSquish(currentScrollDelta) {
+        if (reducedMotionEnabled) return;
         currentSquish += (currentScrollDelta / skewReduction);
         currentSquish = currentSquish * squishDamping;
         if (Math.abs(currentSquish) < 0.1) currentSquish = 0;
@@ -111,6 +115,10 @@
     }
 
     function init() {
+        // Load the users motion reduction preference, since for sensitive people it could be a bit of a vomit comet
+        var motionPreference = window.magica11y.prefersReducedMotion.default();
+        reducedMotionEnabled = (motionPreference === window.magica11y.prefersReducedMotion.motionPreferences.REDUCE);
+
         // Get image y offset from top of screen
         getImageOffsets();
 
