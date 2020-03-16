@@ -2,7 +2,7 @@
     'use strict';
 
     var currentScrollTop = window.pageYOffset,
-        oldScrollTop,
+        oldScrollTop = window.pageYOffset,
         $allWrappers = $('.img-wrapper'),
         $allImages = $('.img-wrapper img'),
         // We keep a reference to the length of the array to prevent extra array accesses
@@ -12,7 +12,12 @@
         $downArrow = $('.chevron-down'),
         scrollCoefficient = 2.2,
         scrollTime = 1000,
-        windowHeightReduced = $(window).height() / 3;
+        windowHeightReduced = $(window).height() / 3,
+        $container = $('.container'),
+        currentSquish = 0,
+        squishDamping = 0.8,
+        skewReduction = 50,
+        translationBoost = 8;
 
     /**
      * @desc Record the image offset as a data attribute in the image
@@ -23,7 +28,7 @@
         $allImages.each(function () {
             allImagesOffsets.push($(this).parent().offset().top);
         });
-        
+
         windowHeightReduced = $(window).height() / 3;
     }
 
@@ -69,28 +74,51 @@
     }
 
     /**
+     * @desc For the scroll squishing, we need to lock some aspects of the page to prevent scroll bar oddities
+     */
+    function scrollSquishInit() {
+        $container.height($container.outerHeight());
+        $container.css('overflow-y', 'hidden');
+    }
+
+    /**
+     * @desc Every frame, adjust the skew of the page, so that when scrolling we get a little squishing effect
+     * @param {Number} currentScrollDelta - The delta of the current scroll, 0 when no scrolling occurred this frame
+     */
+    function scrollSquish(currentScrollDelta) {
+        currentSquish += (currentScrollDelta / skewReduction);
+        currentSquish = currentSquish * squishDamping;
+        if (Math.abs(currentSquish) < 0.1) currentSquish = 0;
+        $container.css('transform', 'translateY(' + (currentSquish * translationBoost) + 'px) skewY(' + currentSquish + 'deg)');
+    }
+
+    /**
      * @desc Highly optimised animation loop, uses requestAnimationFrame for max performance
      */
     function animLoop() {
         currentScrollTop = window.pageYOffset;
+
+        scrollSquish(currentScrollTop - oldScrollTop);
 
         if (currentScrollTop !== oldScrollTop) {
             setImgScroll(currentScrollTop);
             fadeDownArrow(currentScrollTop);
             oldScrollTop = currentScrollTop;
         }
-        
+
         // Call this function once every frame
         requestAnimationFrame(animLoop);
     }
 
     function init() {
+        // Get image y offset from top of screen
+        getImageOffsets();
+
+        scrollSquishInit();
+
         // Begin the animation loop
         requestAnimationFrame(animLoop);
 
-        // Get image y offset from top of screen
-        getImageOffsets();
-        
         // Get all non empty hash links and attach scroll
         $('a[href*="#"]').not('[href="#"]').not('[href="#0"]').click(function (event) {
             var pathEquivalent = location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, ''),
@@ -98,7 +126,7 @@
             if (pathEquivalent && hostEquivalent) {
                 var hash = this.hash,
                     $target = $(hash);
-                
+
                 $target = $target.length ? $target : $('[name=' + this.hash.slice(1) + ']');
                 if ($target.length) {
                     // Prevent default browser behaviour
@@ -157,7 +185,7 @@
         ].map(function (value) {
             return '<div style="width:' + value + '%;"></div>';
         });
-        
+
         // Add the first 6 lines to the end, so it loops smoothly
         lines.push(lines.slice(0, 5).join(''));
 
