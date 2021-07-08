@@ -16,7 +16,8 @@
         $container = $('.container'),
         currentSquish = 0,
         squishDamping = 0.8,
-        skewReduction = 50,
+        skewReduction = 80,
+        skewCap = 5,
         translationBoost = 8,
         reducedMotionEnabled;
 
@@ -93,6 +94,8 @@
         currentSquish += (currentScrollDelta / skewReduction);
         currentSquish = currentSquish * squishDamping;
         if (Math.abs(currentSquish) < 0.1) currentSquish = 0;
+        if (currentSquish < -skewCap) currentSquish = -skewCap;
+        if (currentSquish > skewCap) currentSquish = skewCap;
         $container.css('transform', 'translateY(' + (currentSquish * translationBoost) + 'px) skewY(' + currentSquish + 'deg)');
     }
 
