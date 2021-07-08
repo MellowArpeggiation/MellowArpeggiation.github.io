@@ -4,6 +4,16 @@ body {
     overflow-x: hidden;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    a, a:hover {
+        color: #222;
+    }
+
+    .link-effect::after {
+        background-color: #222;
+    }
+}
+
 .text-muted {
     color: #999;
 }
