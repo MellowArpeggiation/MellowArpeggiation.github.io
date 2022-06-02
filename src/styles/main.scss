@@ -1,0 +1,23 @@
+@import "fonts";
+@import "animations";
+
+$title-bg-img: url("../images/TitleTile.png");
+
+body {
+    background-color: black;
+    color: white;
+}
+
+.intro-header {
+    text-align: center;
+    font-family: "Milletun";
+    font-size: 20vw;
+
+    color: transparent;
+    background-clip: text;
+    background-image: $title-bg-img;
+
+    animation: background-scroll 1s linear infinite, fade-in 3s linear 1 2s backwards, fade-in-stroke 1s linear 1 5s backwards;
+
+    -webkit-text-stroke: 2px cyan;
+}

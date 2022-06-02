@@ -1,0 +1,26 @@
+@keyframes background-scroll {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 32px 32px;
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in-stroke {
+    from {
+        -webkit-text-stroke-color: transparent;
+    }
+    to {
+        -webkit-text-stroke-color: cyan;
+    }
+}
