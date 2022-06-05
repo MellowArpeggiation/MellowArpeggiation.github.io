@@ -3,21 +3,69 @@
 
 $title-bg-img: url("../images/TitleTile.png");
 
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
 body {
     background-color: black;
     color: white;
 }
 
-.intro-header {
-    text-align: center;
-    font-family: "Milletun";
-    font-size: 20vw;
+.intro {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
 
-    color: transparent;
-    background-clip: text;
-    background-image: $title-bg-img;
+    & > .intro-header {
+        width: 100%;
+        flex-grow: 1;
 
-    animation: background-scroll 1s linear infinite, fade-in 3s linear 1 2s backwards, fade-in-stroke 1s linear 1 5s backwards;
+        display: flex;
+        align-items: center;
 
-    -webkit-text-stroke: 2px cyan;
+        & > h1 {
+            position: relative;
+
+            flex-grow: 1;
+
+            margin: 0;
+
+            text-align: center;
+            font-family: "Milletun";
+            font-size: 20vw;
+
+            @media (max-width: 768px) {
+                font-size: 24vw;
+            }
+
+            color: transparent;
+            background-clip: text;
+            background-image: $title-bg-img;
+
+            animation: background-scroll 1s linear infinite, fade-in 4s linear 1 1s backwards;
+
+            & > span {
+                position: absolute;
+                left: 0;
+                right: 0;
+                z-index: -1;
+
+                text-shadow: 2px 2px rgba(0, 255, 255, 1), 4px 4px rgba(0, 255, 255, 1);
+                animation: fade-in-cyan-shadow 1s linear 1 5s backwards;
+            }
+        }
+    }
+}
+
+.scroll-indicator {
+    width: 2px;
+    background-color: white;
+    height: 100px;
+    margin-bottom: 10vh;
+
+    animation: scroll-indicator-move 2s infinite ease-in-out 6s backwards;
 }
