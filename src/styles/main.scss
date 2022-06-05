@@ -12,6 +12,7 @@ $title-bg-img: url("../images/TitleTile.png");
 body {
     background-color: black;
     color: white;
+    margin: 0;
 }
 
 .intro {
@@ -36,7 +37,7 @@ body {
 
             text-align: center;
             font-family: "Milletun";
-            font-size: 20vw;
+            font-size: 18vw;
 
             @media (max-width: 768px) {
                 font-size: 24vw;
