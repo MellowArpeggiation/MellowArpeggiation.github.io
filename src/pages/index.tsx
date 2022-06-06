@@ -1,10 +1,16 @@
 import * as React from "react"
 import { Parallax, ParallaxLayer, IParallax } from '@react-spring/parallax'
+// @ts-ignore
 import Anagram from 'react-anagram-animation'
 import "../styles/main.scss"
 import Header from "../components/header"
+import Project from "../components/project"
 // @ts-ignore
 import AboutMdx from "../sections/about"
+// @ts-ignore
+import DKMdx from "../sections/games/drift-king"
+// @ts-ignore
+import OKMdx from "../sections/games/ok-boomer"
 
 
 // markup
@@ -44,7 +50,7 @@ const IndexPage = () => {
                 </ParallaxLayer>
                 <ParallaxLayer className="background-title" offset={0.99} speed={0.35}>
                     <div className="up-down">
-                        ABOUT
+                        About
                     </div>
                 </ParallaxLayer>
                 <ParallaxLayer className="page" offset={0.9} speed={0.5}>
@@ -56,11 +62,18 @@ const IndexPage = () => {
                 {/* Project section */}
                 <ParallaxLayer className="background-title" offset={1.6} speed={0.25}>
                     <div className="up-down">
-                        PROJECT
+                        Project
                     </div>
                 </ParallaxLayer>
                 <ParallaxLayer className="floater" offset={1.7} speed={0.5} >
-
+                    <Project side="left">
+                        <DKMdx />
+                    </Project>
+                </ParallaxLayer>
+                <ParallaxLayer className="floater" offset={1.7} speed={0.5} >
+                    <Project side="right">
+                        <OKMdx />
+                    </Project>
                 </ParallaxLayer>
             </Parallax>
         </main>
