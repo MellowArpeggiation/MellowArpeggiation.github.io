@@ -39,7 +39,10 @@ const IndexPage = () => {
                 </ParallaxLayer>
 
                 {/* About section */}
-                <ParallaxLayer className="background-title" offset={0.9} speed={0.25}>
+                <ParallaxLayer offset={0.99} speed={0.3}>
+                    <div className="background-parallelogram"></div>
+                </ParallaxLayer>
+                <ParallaxLayer className="background-title" offset={0.99} speed={0.35}>
                     <div className="up-down">
                         ABOUT
                     </div>
@@ -55,6 +58,9 @@ const IndexPage = () => {
                     <div className="up-down">
                         PROJECT
                     </div>
+                </ParallaxLayer>
+                <ParallaxLayer className="floater" offset={1.7} speed={0.5} >
+
                 </ParallaxLayer>
             </Parallax>
         </main>
