@@ -13,12 +13,20 @@ const IndexPage = () => {
     return (
         <main>
             <title>Mellow Portfolio</title>
-            <Parallax ref={parallax} pages={2}>
-                <ParallaxLayer speed={1}>
+            <Parallax ref={parallax} pages={3}>
+                <ParallaxLayer className="page" speed={1}>
                     <Header title="Mellow" />
+                    <div className="scroll-indicator"></div>
                 </ParallaxLayer>
-                <ParallaxLayer offset={1}>
-                    <AboutMdx />
+                <ParallaxLayer className="background-title" offset={0.9} speed={0.25}>
+                    <div className="up-down">
+                        ABOUT
+                    </div>
+                </ParallaxLayer>
+                <ParallaxLayer className="page" offset={0.9} speed={0.5}>
+                    <section>
+                        <AboutMdx />
+                    </section>
                 </ParallaxLayer>
             </Parallax>
         </main>

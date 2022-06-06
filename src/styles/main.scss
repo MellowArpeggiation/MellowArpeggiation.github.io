@@ -13,53 +13,69 @@ body {
     background-color: black;
     color: white;
     margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 150%;
 }
 
-.intro {
-    height: 100vh;
+a {
+    color: cyan;
+    // transition: color 0.2s;
+
+    &:hover {
+        color: magenta;
+    }
+}
+
+section {
+    width: 66.666%;
+}
+
+.intro-header {
+    width: 100%;
+    flex-grow: 1;
+
     display: flex;
     align-items: center;
-    flex-flow: column;
 
-    & > .intro-header {
-        width: 100%;
+    & > h1 {
+        position: relative;
+
         flex-grow: 1;
 
-        display: flex;
-        align-items: center;
+        margin: 0;
 
-        & > h1 {
-            position: relative;
+        text-align: center;
+        font-family: "Milletun";
+        font-size: 18vw;
 
-            flex-grow: 1;
+        @media (max-width: 768px) {
+            font-size: 24vw;
+        }
 
-            margin: 0;
+        color: transparent;
+        background-clip: text;
+        background-image: $title-bg-img;
+        background-attachment: fixed;
 
-            text-align: center;
-            font-family: "Milletun";
-            font-size: 18vw;
+        animation: background-scroll 1s linear infinite, fade-in 4s linear 1 1s backwards;
 
-            @media (max-width: 768px) {
-                font-size: 24vw;
-            }
+        & > span {
+            position: absolute;
+            left: 0;
+            right: 0;
+            z-index: -1;
 
-            color: transparent;
-            background-clip: text;
-            background-image: $title-bg-img;
-
-            animation: background-scroll 1s linear infinite, fade-in 4s linear 1 1s backwards;
-
-            & > span {
-                position: absolute;
-                left: 0;
-                right: 0;
-                z-index: -1;
-
-                text-shadow: 2px 2px rgba(0, 255, 255, 1), 4px 4px rgba(0, 255, 255, 1);
-                animation: fade-in-cyan-shadow 1s linear 1 5s backwards;
-            }
+            text-shadow: 2px 2px rgba(0, 255, 255, 1), 4px 4px rgba(0, 255, 255, 1);
+            animation: fade-in-cyan-shadow 1s linear 1 5s backwards;
         }
     }
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .scroll-indicator {
@@ -69,4 +85,19 @@ body {
     margin-bottom: 10vh;
 
     animation: scroll-indicator-move 2s infinite ease-in-out 6s backwards;
+}
+
+.background-title {
+    font-size: 24vw;
+
+    color: rgba(255, 255, 255, 0.1);
+    -webkit-text-fill-color: black;
+    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.1);
+
+    color: black;
+    text-shadow: 8px 8px rgba(255, 255, 255, 0.2);
+}
+
+.up-down {
+    animation: up-down 6s ease-in-out infinite alternate;
 }

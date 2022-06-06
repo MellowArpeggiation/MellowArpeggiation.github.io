@@ -5,14 +5,11 @@ type HeaderProps = {
 }
 
 const Header = ({ title }: HeaderProps) =>
-    <div className="intro">
-        <div className="intro-header">
-            <h1>
-                {title}
-                <span>{title}</span>
-            </h1>
-        </div>
-        <div className="scroll-indicator"></div>
+    <div className="intro-header">
+        <h1>
+            {title}
+            <span>{title}</span>
+        </h1>
     </div>
 
 export default Header
