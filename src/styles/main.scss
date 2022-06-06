@@ -18,10 +18,33 @@ body {
 
 a {
     color: cyan;
-    // transition: color 0.2s;
 
     &:hover {
         color: magenta;
+    }
+
+    &:not(.disable-underline) {
+        position: relative;
+        text-decoration: none;
+        outline: none;
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: magenta;
+            opacity: 0;
+            transition: opacity .3s, transform .3s;
+            transform: translateY(0.6em);
+        }
+
+        &:hover::after {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 }
 
