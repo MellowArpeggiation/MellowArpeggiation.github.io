@@ -19,7 +19,7 @@ const IndexPage = () => {
 
     return (
         <main>
-            <title>Mellow Portfolio</title>
+            <title>Mᴇʟʟᴏᴡ Aʀᴘᴇɢɢɪᴀᴛɪᴏɴ</title>
             <Parallax ref={parallax} pages={3}>
 
                 {/* Title area */}
@@ -69,8 +69,6 @@ const IndexPage = () => {
                     <Project side="left">
                         <DKMdx />
                     </Project>
-                </ParallaxLayer>
-                <ParallaxLayer className="floater" offset={1.7} speed={0.5} >
                     <Project side="right">
                         <OKMdx />
                     </Project>
