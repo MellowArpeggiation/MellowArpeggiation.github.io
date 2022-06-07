@@ -1,0 +1,9 @@
+@function makeLongShadow($color, $length) {
+    $val: 1px 1px $color;
+
+    @for $i from 2 through $length {
+        $val: #{$val}, #{$i}px #{$i}px #{$color};
+    }
+
+    @return $val;
+}

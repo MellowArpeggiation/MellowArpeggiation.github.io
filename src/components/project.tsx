@@ -9,8 +9,11 @@ const Project: React.FunctionComponent<Props> = ({
     side,
     children,
 }) => (
-    <div className={`project-container project-container-${side}`}>
-        {children}
+    <div className="project-container">
+        <div className={`project project-${side}`}>
+            {children}
+        </div>
+        <div className={`timeline-icon timeline-icon-${side}`}></div>
     </div>
 );
 

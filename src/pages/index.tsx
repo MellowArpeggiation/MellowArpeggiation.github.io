@@ -65,7 +65,8 @@ const IndexPage = () => {
                         Project
                     </div>
                 </ParallaxLayer>
-                <ParallaxLayer className="floater" offset={1.7} speed={0.5} >
+                <ParallaxLayer className="floater" offset={1.7} speed={0.5}>
+                    <div className="project-timeline"></div>
                     <Project side="left">
                         <DKMdx />
                     </Project>
