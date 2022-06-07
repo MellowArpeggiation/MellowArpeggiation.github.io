@@ -1,7 +1,9 @@
 import * as React from "react"
 import { Parallax, ParallaxLayer, IParallax } from '@react-spring/parallax'
+import WordCloud from "react-d3-cloud"
 // @ts-ignore
 import Anagram from 'react-anagram-animation'
+
 import "../styles/main.scss"
 import Header from "../components/header"
 import Project from "../components/project"
@@ -11,6 +13,7 @@ import AboutMdx from "../sections/about"
 import DKMdx from "../sections/games/drift-king"
 // @ts-ignore
 import OKMdx from "../sections/games/ok-boomer"
+import Skills from "../sections/skills"
 
 
 // markup
@@ -20,7 +23,7 @@ const IndexPage = () => {
     return (
         <main>
             <title>Mᴇʟʟᴏᴡ Aʀᴘᴇɢɢɪᴀᴛɪᴏɴ</title>
-            <Parallax ref={parallax} pages={3}>
+            <Parallax ref={parallax} pages={4}>
 
                 {/* Title area */}
                 <ParallaxLayer className="page" speed={1}>
@@ -65,7 +68,7 @@ const IndexPage = () => {
                         Project
                     </div>
                 </ParallaxLayer>
-                <ParallaxLayer className="floater" offset={1.7} speed={0.5}>
+                <ParallaxLayer offset={1.7} speed={0.5}>
                     <div className="project-timeline"></div>
                     <Project side="left">
                         <DKMdx />
@@ -73,6 +76,25 @@ const IndexPage = () => {
                     <Project side="right">
                         <OKMdx />
                     </Project>
+                </ParallaxLayer>
+
+                {/* Skills section */}
+                <ParallaxLayer offset={2.2} speed={0.3}>
+                    <div className="background-parallelogram"></div>
+                </ParallaxLayer>
+                <ParallaxLayer className="background-title" offset={2.2} speed={0.25}>
+                    <div className="up-down">
+                        Skills
+                    </div>
+                </ParallaxLayer>
+                <ParallaxLayer offset={2.2} speed={0.5}>
+                    <WordCloud
+                        data={Skills}
+                        height={300}
+                        font={"Milletun"}
+                        fill={() => Math.random() > 0.5 ? 'cyan' : 'magenta'}
+                        rotate={() => 0}
+                    />
                 </ParallaxLayer>
             </Parallax>
         </main>
