@@ -28,6 +28,7 @@
     "react-anagram-animation": "^1.1.3",
     "react-d3-cloud": "^1.0.5",
     "react-dom": "^18.1.0",
+    "react-vertical-timeline-component": "^3.5.2",
     "sass": "^1.52.1"
   },
   "devDependencies": {

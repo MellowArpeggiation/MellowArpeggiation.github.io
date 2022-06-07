@@ -4,15 +4,25 @@ import WordCloud from "react-d3-cloud"
 // @ts-ignore
 import Anagram from 'react-anagram-animation'
 
+// @ts-ignore
+import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
+import 'react-vertical-timeline-component/style.min.css';
+
 import "../styles/main.scss"
 import Header from "../components/header"
 import Project from "../components/project"
+
 // @ts-ignore
 import AboutMdx from "../sections/about"
 // @ts-ignore
 import DKMdx from "../sections/games/drift-king"
 // @ts-ignore
 import OKMdx from "../sections/games/ok-boomer"
+// @ts-ignore
+import MMMdx from "../sections/games/mortalis-machina"
+// @ts-ignore
+import MJMdx from "../sections/projects/moviejazz"
+
 import Skills from "../sections/skills"
 
 
@@ -69,25 +79,59 @@ const IndexPage = () => {
                     </div>
                 </ParallaxLayer>
                 <ParallaxLayer offset={1.7} speed={0.5}>
-                    <div className="project-timeline"></div>
+                    {/* <div className="project-timeline"></div>
                     <Project side="left">
                         <DKMdx />
                     </Project>
                     <Project side="right">
                         <OKMdx />
-                    </Project>
+                    </Project> */}
+                    <VerticalTimeline lineColor={'linear-gradient(0deg, transparent, magenta 5%, magenta 95%, transparent)'}>
+                        <VerticalTimelineElement
+                            contentStyle={{ background: '#111' }}
+                            contentArrowStyle={{ borderRight: '8px solid #111' }}
+                            date="2020 - now"
+                            iconStyle={{ background: 'magenta', boxShadow: 'none' }}
+                        >
+                            <DKMdx />
+                        </VerticalTimelineElement>
+                        <VerticalTimelineElement
+                            contentStyle={{ background: '#111' }}
+                            contentArrowStyle={{ borderRight: '8px solid #111' }}
+                            date="2019 - 2020"
+                            iconStyle={{ background: 'magenta', boxShadow: 'none' }}
+                        >
+                            <OKMdx />
+                        </VerticalTimelineElement>
+                        <VerticalTimelineElement
+                            contentStyle={{ background: '#111' }}
+                            contentArrowStyle={{ borderRight: '8px solid #111' }}
+                            date="2018 - on hold"
+                            iconStyle={{ background: 'magenta', boxShadow: 'none' }}
+                        >
+                            <MMMdx />
+                        </VerticalTimelineElement>
+                        <VerticalTimelineElement
+                            contentStyle={{ background: '#111' }}
+                            contentArrowStyle={{ borderRight: '8px solid #111' }}
+                            date="2017"
+                            iconStyle={{ background: 'magenta', boxShadow: 'none' }}
+                        >
+                            <MJMdx />
+                        </VerticalTimelineElement>
+                    </VerticalTimeline>
                 </ParallaxLayer>
 
                 {/* Skills section */}
-                <ParallaxLayer offset={2.2} speed={0.3}>
+                <ParallaxLayer offset={2.6} speed={0.3}>
                     <div className="background-parallelogram"></div>
                 </ParallaxLayer>
-                <ParallaxLayer className="background-title" offset={2.2} speed={0.25}>
+                <ParallaxLayer className="background-title" offset={2.6} speed={0.25}>
                     <div className="up-down">
                         Skills
                     </div>
                 </ParallaxLayer>
-                <ParallaxLayer offset={2.2} speed={0.5}>
+                <ParallaxLayer offset={2.6} speed={0.5}>
                     <WordCloud
                         data={Skills}
                         height={300}
