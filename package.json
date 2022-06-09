@@ -25,7 +25,7 @@
     "gatsby-plugin-sass": "^5.15.1",
     "gatsby-source-filesystem": "^4.15.0",
     "react": "^18.1.0",
-    "react-anagram-animation": "^1.1.3",
+    "react-anagram-animation": "^1.2.0",
     "react-d3-cloud": "^1.0.5",
     "react-dom": "^18.1.0",
     "react-vertical-timeline-component": "^3.5.2",

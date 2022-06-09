@@ -17,6 +17,12 @@ import AboutMdx from "../sections/about"
 // @ts-ignore
 import DKMdx from "../sections/games/drift-king"
 // @ts-ignore
+import BBMdx from "../sections/games/barefoot-bowen"
+// @ts-ignore
+import TMdx from "../sections/games/totem"
+// @ts-ignore
+import LCMdx from "../sections/games/loccys-choccys"
+// @ts-ignore
 import OKMdx from "../sections/games/ok-boomer"
 // @ts-ignore
 import MMMdx from "../sections/games/mortalis-machina"
@@ -33,7 +39,7 @@ const IndexPage = () => {
     return (
         <main>
             <title>Mᴇʟʟᴏᴡ Aʀᴘᴇɢɢɪᴀᴛɪᴏɴ</title>
-            <Parallax ref={parallax} pages={4}>
+            <Parallax ref={parallax} pages={5}>
 
                 {/* Title area */}
                 <ParallaxLayer className="page" speed={1}>
@@ -51,18 +57,20 @@ const IndexPage = () => {
                                 randomReverseMin: 6000,
                                 randomReverseMax: 7000,
                                 loopAnimation: 12000,
-                                waitToStart: 8000,
+                                waitToStart: 7000,
+                                transitionDuration: 1600,
+                                timingFunction: 'cubic-bezier(.5, 0, .2, 1.1)',
                             }}
                         />
                     </div>
                 </ParallaxLayer>
 
                 {/* About section */}
-                <ParallaxLayer offset={0.99} speed={0.3}>
+                <ParallaxLayer offset={0.9} speed={0.3}>
                     <div className="background-parallelogram"></div>
                 </ParallaxLayer>
                 <ParallaxLayer className="background-title" offset={0.99} speed={0.35}>
-                    <div className="up-down">
+                    <div className="up-down" aria-hidden="true">
                         About
                     </div>
                 </ParallaxLayer>
@@ -72,20 +80,32 @@ const IndexPage = () => {
                     </section>
                 </ParallaxLayer>
 
+                {/* Skills section */}
+                <ParallaxLayer offset={1.4} speed={0.5}>
+                    <div className="background-parallelogram background-parallelogram-alt"></div>
+                </ParallaxLayer>
+                <ParallaxLayer className="background-title" offset={1.5} speed={0.25}>
+                    <div className="up-down text-right" aria-hidden="true">
+                        Skills
+                    </div>
+                </ParallaxLayer>
+                <ParallaxLayer offset={1.5} speed={0.4}>
+                    <WordCloud
+                        data={Skills}
+                        height={300}
+                        font={"Milletun"}
+                        fill={() => Math.random() > 0.5 ? 'cyan' : 'magenta'}
+                        rotate={() => 0}
+                    />
+                </ParallaxLayer>
+
                 {/* Project section */}
-                <ParallaxLayer className="background-title" offset={1.6} speed={0.25}>
-                    <div className="up-down">
+                <ParallaxLayer className="background-title" offset={2.2} speed={0.25} sticky={{start: 2.2, end: 4}}>
+                    <div className="up-down" aria-hidden="true">
                         Project
                     </div>
                 </ParallaxLayer>
-                <ParallaxLayer offset={1.7} speed={0.5}>
-                    {/* <div className="project-timeline"></div>
-                    <Project side="left">
-                        <DKMdx />
-                    </Project>
-                    <Project side="right">
-                        <OKMdx />
-                    </Project> */}
+                <ParallaxLayer offset={2.3} speed={0.5}>
                     <VerticalTimeline lineColor={'linear-gradient(0deg, transparent, magenta 5%, magenta 95%, transparent)'}>
                         <VerticalTimelineElement
                             contentStyle={{ background: '#111' }}
@@ -94,6 +114,30 @@ const IndexPage = () => {
                             iconStyle={{ background: 'magenta', boxShadow: 'none' }}
                         >
                             <DKMdx />
+                        </VerticalTimelineElement>
+                        <VerticalTimelineElement
+                            contentStyle={{ background: '#111' }}
+                            contentArrowStyle={{ borderRight: '8px solid #111' }}
+                            date="2022"
+                            iconStyle={{ background: 'magenta', boxShadow: 'none' }}
+                        >
+                            <BBMdx />
+                        </VerticalTimelineElement>
+                        <VerticalTimelineElement
+                            contentStyle={{ background: '#111' }}
+                            contentArrowStyle={{ borderRight: '8px solid #111' }}
+                            date="2021"
+                            iconStyle={{ background: 'magenta', boxShadow: 'none' }}
+                        >
+                            <TMdx />
+                        </VerticalTimelineElement>
+                        <VerticalTimelineElement
+                            contentStyle={{ background: '#111' }}
+                            contentArrowStyle={{ borderRight: '8px solid #111' }}
+                            date="2021"
+                            iconStyle={{ background: 'magenta', boxShadow: 'none' }}
+                        >
+                            <LCMdx />
                         </VerticalTimelineElement>
                         <VerticalTimelineElement
                             contentStyle={{ background: '#111' }}
@@ -120,25 +164,6 @@ const IndexPage = () => {
                             <MJMdx />
                         </VerticalTimelineElement>
                     </VerticalTimeline>
-                </ParallaxLayer>
-
-                {/* Skills section */}
-                <ParallaxLayer offset={2.6} speed={0.3}>
-                    <div className="background-parallelogram"></div>
-                </ParallaxLayer>
-                <ParallaxLayer className="background-title" offset={2.6} speed={0.25}>
-                    <div className="up-down">
-                        Skills
-                    </div>
-                </ParallaxLayer>
-                <ParallaxLayer offset={2.6} speed={0.5}>
-                    <WordCloud
-                        data={Skills}
-                        height={300}
-                        font={"Milletun"}
-                        fill={() => Math.random() > 0.5 ? 'cyan' : 'magenta'}
-                        rotate={() => 0}
-                    />
                 </ParallaxLayer>
             </Parallax>
         </main>
