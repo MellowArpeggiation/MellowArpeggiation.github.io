@@ -14,7 +14,7 @@ const skillNames = [
 const Skills = skillNames.map((name) => {
     return {
         text: name,
-        value: (1 / name.length) * 1000,
+        value: (1 / name.length) * 3000,
     };
 });
 

@@ -66,13 +66,13 @@ const IndexPage = () => {
                 </ParallaxLayer>
 
                 {/* About section */}
-                <ParallaxLayer offset={0.9} speed={0.3}>
-                    <div className="background-parallelogram"></div>
-                </ParallaxLayer>
                 <ParallaxLayer className="background-title" offset={0.99} speed={0.35}>
                     <div className="up-down" aria-hidden="true">
                         About
                     </div>
+                </ParallaxLayer>
+                <ParallaxLayer offset={0.9} speed={0.3}>
+                    <div className="background-parallelogram"></div>
                 </ParallaxLayer>
                 <ParallaxLayer className="page" offset={0.9} speed={0.5}>
                     <section>
@@ -81,32 +81,38 @@ const IndexPage = () => {
                 </ParallaxLayer>
 
                 {/* Skills section */}
-                <ParallaxLayer offset={1.4} speed={0.5}>
-                    <div className="background-parallelogram background-parallelogram-alt"></div>
-                </ParallaxLayer>
                 <ParallaxLayer className="background-title" offset={1.5} speed={0.25}>
                     <div className="up-down text-right" aria-hidden="true">
                         Skills
                     </div>
                 </ParallaxLayer>
-                <ParallaxLayer offset={1.5} speed={0.4}>
-                    <WordCloud
-                        data={Skills}
-                        height={300}
-                        font={"Milletun"}
-                        fill={() => Math.random() > 0.5 ? 'cyan' : 'magenta'}
-                        rotate={() => 0}
-                    />
+                <ParallaxLayer offset={1.4} speed={0.5}>
+                    <div className="background-parallelogram background-parallelogram-alt"></div>
+                </ParallaxLayer>
+                <ParallaxLayer offset={1.6} speed={0.4}>
+                    <div style={{maxWidth: 1200, margin: 'auto'}}>
+                        <WordCloud
+                            data={Skills}
+                            width={window.innerHeight > window.innerWidth ? 300 : 500}
+                            height={window.innerHeight > window.innerWidth ? 500 : 300}
+                            font={"Milletun"}
+                            fill={() => Math.random() > 0.5 ? 'cyan' : 'magenta'}
+                            rotate={() => 0}
+                        />
+                    </div>
                 </ParallaxLayer>
 
                 {/* Project section */}
-                <ParallaxLayer className="background-title" offset={2.2} speed={0.25} sticky={{start: 2.2, end: 4}}>
+                <ParallaxLayer offset={2.4} speed={-0.1}>
+                    <div className="background-hatch"></div>
+                </ParallaxLayer>
+                <ParallaxLayer className="background-title" offset={2} speed={0.25}>
                     <div className="up-down" aria-hidden="true">
-                        Project
+                        Projects
                     </div>
                 </ParallaxLayer>
-                <ParallaxLayer offset={2.3} speed={0.5}>
-                    <VerticalTimeline lineColor={'linear-gradient(0deg, transparent, magenta 5%, magenta 95%, transparent)'}>
+                <ParallaxLayer offset={2.4} speed={0.5}>
+                    <VerticalTimeline lineColor={'linear-gradient(180deg, transparent, magenta 64px, magenta 95%, transparent)'}>
                         <VerticalTimelineElement
                             contentStyle={{ background: '#111' }}
                             contentArrowStyle={{ borderRight: '8px solid #111' }}

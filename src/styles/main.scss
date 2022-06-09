@@ -155,8 +155,15 @@ section {
     }
 }
 
+.background-hatch {
+    width: 100%;
+    height: 9999px;
+    background-image: linear-gradient(180deg, black, rgba(0, 0, 0, 0.75) 512px, rgba(0, 0, 0, 0.75)), $title-bg-img;
+    z-index: -200;
+}
+
 .background-title {
-    z-index: -1;
+    // z-index: -1;
 
     font-size: 24vw;
     font-variant: small-caps;
