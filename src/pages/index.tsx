@@ -10,25 +10,10 @@ import 'react-vertical-timeline-component/style.min.css';
 
 import "../styles/main.scss"
 import Header from "../components/header"
-import Project from "../components/project"
 
 // @ts-ignore
 import AboutMdx from "../sections/about"
-// @ts-ignore
-import DKMdx from "../sections/games/drift-king"
-// @ts-ignore
-import BBMdx from "../sections/games/barefoot-bowen"
-// @ts-ignore
-import TMdx from "../sections/games/totem"
-// @ts-ignore
-import LCMdx from "../sections/games/loccys-choccys"
-// @ts-ignore
-import OKMdx from "../sections/games/ok-boomer"
-// @ts-ignore
-import MMMdx from "../sections/games/mortalis-machina"
-// @ts-ignore
-import MJMdx from "../sections/projects/moviejazz"
-
+import Projects from "../sections/projects"
 import Skills from "../sections/skills"
 
 
@@ -39,7 +24,7 @@ const IndexPage = () => {
     return (
         <main>
             <title>Mᴇʟʟᴏᴡ Aʀᴘᴇɢɢɪᴀᴛɪᴏɴ</title>
-            <Parallax ref={parallax} pages={5}>
+            <Parallax ref={parallax} pages={8}>
 
                 {/* Title area */}
                 <ParallaxLayer className="page" speed={1}>
@@ -97,13 +82,14 @@ const IndexPage = () => {
                             height={window.innerHeight > window.innerWidth ? 500 : 300}
                             font={"Milletun"}
                             fill={() => Math.random() > 0.5 ? 'cyan' : 'magenta'}
+                            padding={4}
                             rotate={() => 0}
                         />
                     </div>
                 </ParallaxLayer>
 
                 {/* Project section */}
-                <ParallaxLayer offset={2.4} speed={-0.1}>
+                <ParallaxLayer offset={2.4}>
                     <div className="background-hatch"></div>
                 </ParallaxLayer>
                 <ParallaxLayer className="background-title" offset={2} speed={0.25}>
@@ -112,63 +98,17 @@ const IndexPage = () => {
                     </div>
                 </ParallaxLayer>
                 <ParallaxLayer offset={2.4} speed={0.5}>
-                    <VerticalTimeline lineColor={'linear-gradient(180deg, transparent, magenta 64px, magenta 95%, transparent)'}>
-                        <VerticalTimelineElement
-                            contentStyle={{ background: '#111' }}
-                            contentArrowStyle={{ borderRight: '8px solid #111' }}
-                            date="2020 - now"
-                            iconStyle={{ background: 'magenta', boxShadow: 'none' }}
-                        >
-                            <DKMdx />
-                        </VerticalTimelineElement>
-                        <VerticalTimelineElement
-                            contentStyle={{ background: '#111' }}
-                            contentArrowStyle={{ borderRight: '8px solid #111' }}
-                            date="2022"
-                            iconStyle={{ background: 'magenta', boxShadow: 'none' }}
-                        >
-                            <BBMdx />
-                        </VerticalTimelineElement>
-                        <VerticalTimelineElement
-                            contentStyle={{ background: '#111' }}
-                            contentArrowStyle={{ borderRight: '8px solid #111' }}
-                            date="2021"
-                            iconStyle={{ background: 'magenta', boxShadow: 'none' }}
-                        >
-                            <TMdx />
-                        </VerticalTimelineElement>
-                        <VerticalTimelineElement
-                            contentStyle={{ background: '#111' }}
-                            contentArrowStyle={{ borderRight: '8px solid #111' }}
-                            date="2021"
-                            iconStyle={{ background: 'magenta', boxShadow: 'none' }}
-                        >
-                            <LCMdx />
-                        </VerticalTimelineElement>
-                        <VerticalTimelineElement
-                            contentStyle={{ background: '#111' }}
-                            contentArrowStyle={{ borderRight: '8px solid #111' }}
-                            date="2019 - 2020"
-                            iconStyle={{ background: 'magenta', boxShadow: 'none' }}
-                        >
-                            <OKMdx />
-                        </VerticalTimelineElement>
-                        <VerticalTimelineElement
-                            contentStyle={{ background: '#111' }}
-                            contentArrowStyle={{ borderRight: '8px solid #111' }}
-                            date="2018 - on hold"
-                            iconStyle={{ background: 'magenta', boxShadow: 'none' }}
-                        >
-                            <MMMdx />
-                        </VerticalTimelineElement>
-                        <VerticalTimelineElement
-                            contentStyle={{ background: '#111' }}
-                            contentArrowStyle={{ borderRight: '8px solid #111' }}
-                            date="2017"
-                            iconStyle={{ background: 'magenta', boxShadow: 'none' }}
-                        >
-                            <MJMdx />
-                        </VerticalTimelineElement>
+                    <VerticalTimeline lineColor={'linear-gradient(180deg, transparent, cyan 64px, cyan 95%, transparent)'}>
+                        {Projects.map((project) => {
+                            return <VerticalTimelineElement
+                                contentStyle={{ background: '#111' }}
+                                contentArrowStyle={{ borderRight: '8px solid #111' }}
+                                date={project.date}
+                                iconStyle={{ background: 'cyan', boxShadow: 'none' }}
+                            >
+                                <project.content />
+                            </VerticalTimelineElement>
+                        })}
                     </VerticalTimeline>
                 </ParallaxLayer>
             </Parallax>
