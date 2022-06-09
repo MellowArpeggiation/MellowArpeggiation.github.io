@@ -28,6 +28,7 @@ const IndexPage = () => {
 
                 {/* Title area */}
                 <ParallaxLayer className="page" speed={1}>
+                    <div className="load-spinner"></div>
                     <Header title="Mellow" />
                     <div className="scroll-indicator"></div>
                 </ParallaxLayer>

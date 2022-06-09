@@ -29,22 +29,31 @@
 
 @keyframes scroll-indicator-move {
     0% {
-      transform: translateY(-50%) scaleY(0);
+        transform: translateY(-50%) scaleY(0);
     }
     50% {
-      transform: translateY(0) scaleY(1);
+        transform: translateY(0) scaleY(1);
     }
     100% {
-      transform: translateY(50%) scaleY(0);
+        transform: translateY(50%) scaleY(0);
     }
-  }
+}
 
 
-  @keyframes up-down {
+@keyframes up-down {
     from {
         transform: translateY(-32px);
     }
     to {
         transform: translateY(32px);
     }
-  }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
