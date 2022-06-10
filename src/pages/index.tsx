@@ -20,6 +20,7 @@ import Skills from "../sections/skills"
 // markup
 const IndexPage = () => {
     const parallax = React.useRef<IParallax>(null!)
+    const isBrowser = typeof window !== 'undefined';
 
     return (
         <main>
@@ -79,8 +80,8 @@ const IndexPage = () => {
                     <div style={{maxWidth: 1200, margin: 'auto'}}>
                         <WordCloud
                             data={Skills}
-                            width={window.innerHeight > window.innerWidth ? 300 : 500}
-                            height={window.innerHeight > window.innerWidth ? 500 : 300}
+                            width={isBrowser && window.innerHeight > window.innerWidth ? 300 : 500}
+                            height={isBrowser && window.innerHeight > window.innerWidth ? 500 : 300}
                             font={"Milletun"}
                             fill={() => Math.random() > 0.5 ? 'cyan' : 'magenta'}
                             padding={4}
