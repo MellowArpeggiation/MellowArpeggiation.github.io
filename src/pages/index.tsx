@@ -25,7 +25,12 @@ const IndexPage = () => {
     return (
         <main>
             <title>Mᴇʟʟᴏᴡ Aʀᴘᴇɢɢɪᴀᴛɪᴏɴ</title>
-            <Parallax ref={parallax} pages={8}>
+            <Parallax
+                ref={parallax}
+                pages={8}
+                className={'parallax-container'}
+                innerStyle={{ backgroundColor: 'black' }}
+            >
 
                 {/* Title area */}
                 <ParallaxLayer className="page" speed={1}>
@@ -101,8 +106,9 @@ const IndexPage = () => {
                 </ParallaxLayer>
                 <ParallaxLayer offset={2.4} speed={0.5}>
                     <VerticalTimeline lineColor={'linear-gradient(180deg, transparent, cyan 64px, cyan 95%, transparent)'}>
-                        {Projects.map((project) => {
+                        {Projects.map((project, i) => {
                             return <VerticalTimelineElement
+                                key={i}
                                 contentStyle={{ background: '#111' }}
                                 contentArrowStyle={{ borderRight: '8px solid #111' }}
                                 date={project.date}

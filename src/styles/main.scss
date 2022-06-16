@@ -70,6 +70,35 @@ section {
     }
 }
 
+.parallax-container {
+    background-color: cyan;
+    animation: 0.6s background-fade-in 1 6s backwards;
+
+    scrollbar-color: cyan black;
+    scrollbar-width: thin;
+
+    &::-webkit-scrollbar {
+        width: 8px;
+        background-color: black;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        // very neat hack for animating the scrollbar colour!
+        background-color: inherit;
+
+        &:horizontal:hover,
+        &:vertical:hover {
+            background-color: darken(cyan, 10%);
+        }
+
+        &:horizontal:active,
+        &:vertical:active {
+            background-color: darken(cyan, 20%);
+        }
+    }
+
+}
+
 .text-right {
     text-align: right;
 }

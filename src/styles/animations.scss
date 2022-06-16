@@ -1,18 +1,29 @@
-@keyframes background-scroll {
-    from {
-        background-position: 0 0;
-    }
-    to {
-        background-position: 32px 32px;
-    }
-}
-
 @keyframes fade-in {
     from {
         opacity: 0;
     }
     to {
         opacity: 1;
+    }
+}
+
+@keyframes background-fade-in {
+    from {
+        background-color: black;
+        scrollbar-color: black black;
+    }
+    to {
+        background-color: cyan;
+        scrollbar-color: cyan black;
+    }
+}
+
+@keyframes background-scroll {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 32px 32px;
     }
 }
 
