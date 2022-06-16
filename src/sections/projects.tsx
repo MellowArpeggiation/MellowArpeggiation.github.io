@@ -1,3 +1,4 @@
+import { FunctionComponent } from "react"
 
 // @ts-ignore
 import DriftKingMdx from "../sections/games/drift-king"
@@ -31,7 +32,7 @@ import PointourMdx from "../sections/bachelor/pointour"
 import ProtohookMdx from "../sections/bachelor/protohook"
 
 type Project = {
-    content: HTMLElement,
+    content: FunctionComponent,
     date: string,
     color: string,
 }
@@ -40,7 +41,7 @@ const personalColor = 'magenta'
 const uniColor = 'yellow'
 const workColor = 'red'
 
-const Projects = [
+const Projects: Project[] = [
     {
         content: DriftKingMdx,
         date: '2020 - now',

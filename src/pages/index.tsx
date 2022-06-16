@@ -3,6 +3,8 @@ import { Parallax, ParallaxLayer, IParallax } from '@react-spring/parallax'
 import WordCloud from "react-d3-cloud"
 // @ts-ignore
 import Anagram from 'react-anagram-animation'
+// @ts-ignore
+import { MDXProvider } from "@mdx-js/react"
 
 // @ts-ignore
 import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
@@ -87,7 +89,7 @@ const IndexPage = () => {
                             data={Skills}
                             width={isBrowser && window.innerHeight > window.innerWidth ? 300 : 500}
                             height={isBrowser && window.innerHeight > window.innerWidth ? 500 : 300}
-                            font={"Milletun"}
+                            font="Milletun"
                             fill={() => Math.random() > 0.5 ? 'cyan' : 'magenta'}
                             padding={4}
                             rotate={() => 0}
