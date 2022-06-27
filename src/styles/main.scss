@@ -47,6 +47,10 @@ a {
             transform: translateY(0);
         }
     }
+
+    .vertical-timeline-element-content & {
+        font-size: 1.5rem;
+    }
 }
 
 p, h2, h3, h4 {
