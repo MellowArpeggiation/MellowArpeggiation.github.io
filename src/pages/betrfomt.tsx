@@ -103,9 +103,9 @@ const IndexPage = () => {
                             data={Skills}
                             width={isBrowser && window.innerHeight > window.innerWidth ? 300 : 500}
                             height={isBrowser && window.innerHeight > window.innerWidth ? 500 : 300}
-                            font="Milletun"
+                            font="betrfomt"
                             fill={() => Math.random() > 0.5 ? 'cyan' : 'magenta'}
-                            padding={4}
+                            padding={6}
                             rotate={() => 0}
                         />
                     </div>
