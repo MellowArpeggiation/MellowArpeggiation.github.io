@@ -5,10 +5,9 @@ import SignaturesMdx from "../sections/powershell/outlook-signatures"
 import SharepointMdx from "../sections/powershell/fix-sharepoint"
 import ScrollToTop from "../components/scroll-to-top"
 
+import "../styles/prism-funky.scss"
 
 const PowershellPage = () => {
-    require('../styles/prism-funky.css')
-
     return (
         <main className="container">
             <div className="block-center">
