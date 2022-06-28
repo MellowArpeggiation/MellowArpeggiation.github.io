@@ -1,0 +1,488 @@
+## Autogenerate Outlook signatures
+
+This script will generate signatures in Outlook based on a template .docx. It will log all signature updates to a single server, so you can track rollout and updates
+
+To use this script, you must place the template .docx file in the same location as the script (can be run from a GPO). Microsoft Word must be installed on the target machine, which should be the case if Outlook is installed.
+
+Template replacement format is \[Title\] which will be replaced with the same value within Active Directory, eg. SharePoint Designer
+
+```powershell
+#!/usr/local/bin/pwsh
+<#
+    .SYNOPSIS
+    Script to set Outlook 2010/2013 e-mail signature using Active Directory information
+
+    .DESCRIPTION
+    This script will set the Outlook 2010/2013 e-mail signature on the local client using Active Directory information.
+    The template is created with a Word document, where images can be inserted and AD values can be provided.
+
+    Author: George Paton
+    Version 2.1
+#>
+
+###  Global Vars ###
+## Company Variables
+$COMPANY_LONG_NAME  = "Upstream Production Solutions"
+$COMPANY_SHORT_NAME = "Upstream PS"
+$COMPANY_INITIALS   = "UPS"
+$COMPANY_VAR_NAME   = "upstreamps"
+$COMPANY_EMAIL_EXT  = "@UpstreamPS.com"
+$COMPANY_EMAIL_ENC  = "_upstreamps_com"
+
+### Logging Variables
+$LOG_FOLDER = "\\Log-Server\Log-Share\Logs\"
+$SIGNATURE_LOG_FOLDER = "Set-Outlook-Signature\"
+
+## Signature Variables
+# Signature name as it shows in Outlook
+$SIGNATURE_COMPOSE_NAME = $COMPANY_VAR_NAME
+$SIGNATURE_REPLY_NAME   = $COMPANY_VAR_NAME + "-reply"
+
+# Separate signatures for compose/reply emails
+$SIGNATURE_SEPARATE = $true
+
+# Signature template filenames
+$SIGNATURE_COMPOSE_TEMPLATE = "template-compose.docx"
+$SIGNATURE_REPLY_TEMPLATE   = "template-reply.docx"
+
+$SIGNATURE_FORCE         = $false  #Set to $true if you don't want the users to be able to change signature in Outlook
+$SIGNATURE_FORCE_THEME   = $true   #Set to $true to force Outlook default message theme within registry - ONLY IN Office 2013
+$SIGNATURE_MARK_COMMENTS = $true   #Enable marking comments in emails with initials eg. [GP] - ONLY IN Office 2013
+
+# Default email compose and reply styling
+# Colour is in BGR format, not RGB
+$SIGNATURE_COMPOSE_FONT  = "Calibri"
+$SIGNATURE_COMPOSE_SIZE  = 11
+$SIGNATURE_COMPOSE_COLOR = 0x5c3405
+
+$SIGNATURE_REPLY_FONT    = $SIGNATURE_COMPOSE_FONT
+$SIGNATURE_REPLY_SIZE    = $SIGNATURE_COMPOSE_SIZE
+$SIGNATURE_REPLY_COLOR   = $SIGNATURE_COMPOSE_COLOR
+
+# Maximum amount of days to elapse before autorenewing signature
+$SIGNATURE_MAX_AGE       = 60
+
+# Specify which lines to remove from completed template to handle blank fields in AD
+# This is an ARRAY LITERAL, please read:
+# * http://blogs.msdn.com/b/powershell/archive/2007/01/23/array-literals-in-powershell.aspx
+# ORDER MATTERS, Items higher up will be evaluated first
+# ^? matches any character, in this case, a newline character (so if an entire line is removed,
+# the newline is also removed, which ensures no weird blank lines show up)
+$SIGNATURE_TEMPLATE_BLANKS =
+    "a: [StreetAddress], [l] [st] [postalCode]^?",
+    "d: [TelephoneNumber] | r: [HomePhone] | m: [Mobile]^?",
+    "d: [TelephoneNumber] | r: [HomePhone] | ",
+    "| r: [HomePhone] | m: [Mobile]",
+    "| m: [Mobile]",
+    "d: [TelephoneNumber] | ",
+    "r: [HomePhone] | ",
+    "[l] ",
+    "[st] ",
+    "[postalCode]"
+### /Global Vars ###
+
+if (-not $SIGNATURE_SEPARATE) {
+    $SIGNATURE_REPLY_NAME = $SIGNATURE_COMPOSE_NAME
+}
+
+# Stop execution on unhandled errors
+$ErrorActionPreference = "Stop"
+
+# Environment variables
+$appData = (Get-Item env:appdata).value
+$signaturePath = "\Microsoft\Signatures"
+$localSignaturePath = $appData + $signaturePath
+
+# Check signature path, and create if necessary
+if (-not(Test-Path -Path $localSignaturePath)) {
+    New-Item $localSignaturePath -Type Directory
+}
+
+# Logging
+$logPath = $localSignaturePath + "\set_outlook_signature.log"
+if (-not (Test-Path $logPath) -or (Get-Item $logPath).Length -gt 100kb) {
+    New-Item $logPath -type file -force
+}
+Start-Transcript -path $logPath -Append
+
+# Get Active Directory information for current user
+$username = $env:username
+$filter = "(&(objectCategory=User)(samAccountName=$username))"
+$searcher = New-Object System.DirectoryServices.DirectorySearcher
+$searcher.Filter = $filter
+$ADUserPath = $searcher.FindOne()
+$ADUser = $ADUserPath.GetDirectoryEntry()
+
+### Timestamping - lets not run this more than we need to
+# Get last run timestamp
+$timestampPath = $localSignaturePath + "\set_outlook_signature_timestamp.txt"
+if (-not (Test-Path $timestampPath)) {
+    # If no timestamp is found, the script hasn't run
+    # So lets set last run date to the very distant past
+    $epoch = Get-Date -Year 1970
+    New-Item $timestampPath -type file
+    Add-Content $timestampPath $epoch.ToFileTimeUtc()
+}
+$timestamp = [DateTime]::FromFileTimeUtc((Get-Content $timestampPath))
+$currentTime = (Get-Date).ToUniversalTime()
+
+# Get time since the last run of this script
+$timeSinceLastRun = $currentTime.Subtract($timestamp)
+
+if ($timeSinceLastRun.TotalDays -lt $SIGNATURE_MAX_AGE) {
+    # Get time since last user modification
+    $userTimestamp = $ADUser.whenChanged[0]
+    $timeSinceLastUserChange = $userTimestamp.Subtract($timestamp)
+
+    # Get time since last template change
+    $composeTimestamp = (Get-Item $SIGNATURE_COMPOSE_TEMPLATE).LastWriteTimeUtc
+    $replyTimestamp = (Get-Item $SIGNATURE_REPLY_TEMPLATE).LastWriteTimeUtc
+    $timeSinceLastComposeChange = $composeTimestamp.Subtract($timestamp)
+    $timeSinceLastReplyChange = $replyTimestamp.Subtract($timestamp)
+
+    $changeDetected = $false
+
+    # Positive seconds means the timestamp is older
+    if ($timeSinceLastUserChange.TotalSeconds -gt 0) {
+        Write-Host "User has been modified, renewing signature"
+        $changeDetected = $true
+    }
+
+    if ($timeSinceLastComposeChange.TotalSeconds -gt 0) {
+        Write-Host "Compose template has been modified, renewing signature"
+        $changeDetected = $true
+    }
+
+    if ($timeSinceLastReplyChange.TotalSeconds -gt 0) {
+        Write-Host "Reply template has been modified, renewing signature"
+        $changeDetected = $true
+    }
+
+    if (-not $changeDetected) {
+        Write-Host "No changes detected, exiting..."
+        Stop-Transcript
+        Copy-Item $logPath -Destination ($LOG_FOLDER + $SIGNATURE_LOG_FOLDER + "signature-" + $username + ".log")
+        exit
+    }
+} else {
+    Write-Host "Signature is old, lets renew it"
+}
+
+
+# Load word.application enums
+[System.Reflection.Assembly]::LoadWithPartialName("Microsoft.Office.Interop.Word") | Out-Null
+
+# Text manipulation settings
+$replaceAll = [Enum]::Parse([Microsoft.Office.Interop.Word.WdReplace], "wdReplaceAll")
+$matchCase = $false
+$matchWholeWord = $true
+$matchWildcards = $false
+$matchSoundsLike = $false
+$matchAllWordForms = $false
+$forward = $true
+$wrap = [Enum]::Parse([Microsoft.Office.Interop.Word.WdFindWrap], "wdFindContinue")
+$format = $true
+
+# Create instance of Office Word
+try {
+    $MSWord = New-Object -ComObject word.application
+    Write-Host "Word version is: " $MSWord.BuildFull
+} catch {
+    Write-Host $_.Exception.Message
+    Write-Host "Could not load Word, checking for office install"
+
+    $comObject = Get-ChildItem HKLM:\Software\Classes -ea 0 | Where-Object { $_.PSChildName -eq 'Word.Application' -and (Get-ItemProperty "$(_.PSPath)\CLSID" -ea 0) }
+    if ($comObject -ne $null) {
+        if (Test-Path "C:\program files\Microsoft Office 15\ClientX86") {
+            Write-Host "Repairing Office 32 bit"
+            # CMD Prompt style command for background office repair
+            & "C:\program files\Microsoft Office 15\ClientX86\OfficeClickToRun.exe" scenario=Repair DisplayLevel=False
+        } elseif (Test-Path "C:\program files\Microsoft Office 15\ClientX64") {
+            Write-Host "Repairing Office 64 bit"
+            # CMD Prompt style command for background office repair
+            & "C:\program files\Microsoft Office 15\ClientX64\OfficeClickToRun.exe" scenario=Repair DisplayLevel=False
+        } else {
+            Write-Host "OfficeClickToRun not found, repair failed"
+        }
+    } else {
+        Write-Host "Word COM object not found, please check office is installed"
+    }
+
+    # Finish transcription to log file
+    Stop-Transcript
+
+    # Send log file to Logs folder
+    Copy-Item $logPath -Destination ($LOG_FOLDER + $SIGNATURE_LOG_FOLDER + "signature-" + $username + ".log")
+
+    exit
+}
+
+# Check for pass by reference or not
+# This is a disgusting hack, thanks Microsoft...
+$isPassByRef = $true
+try {
+    $MSWord.Repeat([ref]0)
+} catch {
+    $isPassByRef = $false
+}
+Write-Host "Pass by ref: " $isPassByRef
+
+
+function ReplaceText($find, $replace) {
+    $currentDocument.Select()
+    try {
+        $isMatched = $MSWord.Selection.Find.Execute(
+            $find,
+            $matchCase,
+            $matchWholeWord,
+            $matchWildcards,
+            $matchSoundsLike,
+            $matchAllWordForms,
+            $forward,
+            $wrap,
+            $format,
+            $replace,
+            $replaceAll
+        )
+        if ($isMatched) {
+            Write-Host $find $replace
+            return $true
+        }
+    } catch {
+        Write-Host "Replace failed for:" $find
+    }
+    return $false
+}
+
+function FindText($find) {
+    $currentDocument.Select()
+    if ($MSWord.Selection.Find.Execute(
+        $find,
+        $matchCase,
+        $matchWholeWord,
+        $matchWildcards,
+        $matchSoundsLike,
+        $matchAllWordForms,
+        $forward,
+        $wrap,
+        $format
+    )) {
+        return $true
+    }
+    return $false
+}
+
+function RemoveText($text) {
+    ReplaceText $text ""
+}
+
+function SetSignature($aTemplateFile, $aTemplateName) {
+
+    Write-Host "Copying Signature file: $aTemplateFile"
+    try {
+        Copy-Item $aTemplateFile $localSignaturePath -Recurse -Force
+    } catch {
+        Write-Host "Couldn't load template, error: " $_.Exception.Message
+        return $false
+    }
+
+    # Insert variables from Active Directory into file
+    $fullPath = $localSignaturePath + "\" + $aTemplateFile
+    $currentDocument = $MSWord.Documents.Open($fullPath, $false, $false, $false) #filename, show convert file, open read-only, add to recent files
+
+    Write-Host "Setting signature values for $aTemplateName"
+    foreach ($property in $ADUser.psobject.properties) {
+        $propertyName = "[" + $property.name + "]"
+        if ($property.value -ne $null) {
+            ReplaceText $propertyName $property.value.toString() > $null
+        }
+    }
+
+
+    # Set mail hyperlink
+    foreach ($hyperlink in $MSWord.ActiveDocument.Hyperlinks) {
+        if ($hyperlink.Name -eq "mailto:[mail]") {
+            $mailtoLink = "mailto:" + $ADUser.mail
+            $hyperlink.Address = $mailtoLink
+        }
+    }
+
+    # Remove empty lines if necessary
+    Write-Host "Removing empty template lines"
+    foreach ($line in $SIGNATURE_TEMPLATE_BLANKS) {
+        RemoveText $line > $null
+    }
+
+    # If any blanks failed to be removed, don't save
+    if (FindText "[") {
+        Write-Host "Blank template lines found, saving failed, Please check Powershell-Vars.ps1 string removal array"
+
+        $currentDocument.Close()
+        return $false
+    }
+
+    # Save new message signature
+    Write-Host "Saving signature $aTemplateName"
+
+    # Save HTML
+    $saveFormat = [Enum]::Parse([Microsoft.Office.Interop.Word.WdSaveFormat], "wdFormatHTML")
+    $path = $localSignaturePath + "\" + $aTemplateName + ".htm"
+    try {
+        #filename, file format, lock comments, password, add to recent files
+        if ($isPassByRef) {
+            $currentDocument.SaveAs([ref]$path, [ref]$saveFormat, [ref]$false, [ref]"", [ref]$false)
+        } else {
+            $currentDocument.SaveAs($path, $saveFormat, $false, "", $false)
+        }
+    } catch {
+        Write-Host "Failed to save as HTML, error: " $_.Exception.Message
+        $currentDocument.Close()
+        return $false
+    }
+
+    # Save RTF
+    $saveFormat = [Enum]::Parse([Microsoft.Office.Interop.Word.WdSaveFormat], "wdFormatRTF")
+    $path = $localSignaturePath + "\" + $aTemplateName + ".rtf"
+    try {
+        if ($isPassByRef) {
+            $currentDocument.SaveAs([ref]$path, [ref]$saveFormat, [ref]$false, [ref]"", [ref]$false)
+        } else {
+            $currentDocument.SaveAs($path, $saveFormat, $false, "", $false)
+        }
+    } catch {
+        Write-Host "Failed to save as RTF, error: " $_.Exception.Message
+        $currentDocument.Close()
+        return $false
+    }
+
+    # Save TXT
+    $saveFormat = [Enum]::Parse([Microsoft.Office.Interop.Word.WdSaveFormat], "wdFormatText")
+    $path = $localSignaturePath + "\" + $aTemplateName + ".txt"
+    try {
+        if ($isPassByRef) {
+            $currentDocument.SaveAs([ref]$path, [ref]$saveFormat, [ref]$false, [ref]"", [ref]$false)
+        } else {
+            $currentDocument.SaveAs($path, $saveFormat, $false, "", $false)
+        }
+    } catch {
+        Write-Host "Failed to save as TXT, error: " $_.Exception.Message
+        $currentDocument.Close()
+        return $false
+    }
+
+    $currentDocument.Close()
+    return $true
+}
+
+function ExitGracefully() {
+    $saveOptions = [Enum]::Parse([Microsoft.Office.Interop.Word.WdSaveOptions],  "wdDoNotSaveChanges")
+    if ($isPassByRef) {
+        $MSWord.Quit([ref]$saveOptions)
+    } else {
+        $MSWord.Quit($saveOptions)
+    }
+
+    # Finish transcription to log file
+    Stop-Transcript
+
+    # Send log file to Logs folder
+    Copy-Item $logPath -Destination ($LOG_FOLDER + $SIGNATURE_LOG_FOLDER + "signature-" + $username + ".log")
+}
+
+Write-Host "Waiting 2 seconds for AD object"
+Start-Sleep 2
+
+# Run signature filler
+if (-not (SetSignature $SIGNATURE_COMPOSE_TEMPLATE $SIGNATURE_COMPOSE_NAME)) {
+    Write-Host "Compose Template creation failed, exiting"
+    ExitGracefully
+    exit
+}
+if ($SIGNATURE_SEPARATE) {
+    if (-not (SetSignature $SIGNATURE_REPLY_TEMPLATE $SIGNATURE_REPLY_NAME)) {
+        Write-Host "Reply Template creation failed, exiting"
+        ExitGracefully
+        exit
+    }
+}
+
+# All Office versions
+Write-Host "Adding signature to Office"
+$emailOptions = $MSWord.EmailOptions
+$emailSignature = $emailOptions.EmailSignature
+$emailCompose = $emailOptions.ComposeStyle
+$emailReply = $emailOptions.ReplyStyle
+
+try {
+    $emailSignature.NewMessageSignature = $SIGNATURE_COMPOSE_NAME
+    $emailSignature.ReplyMessageSignature = $SIGNATURE_REPLY_NAME
+} catch {
+    Write-Host "Setting default signature failed, exiting"
+    Write-Host $_.Exception.Message
+    ExitGracefully
+}
+
+
+if ($SIGNATURE_FORCE) {
+    # Office 2010
+    If (Test-Path HKCU:Software\Microsoft\Office\14.0) {
+        Write-Host "Forcing set signature for Outlook 2010"
+        New-ItemProperty HKCU:'\Software\Microsoft\Office\14.0\Common\MailSettings' -Name "ReplySignature" -Value $SIGNATURE_REPLY_NAME -PropertyType "String" -Force
+        New-ItemProperty HKCU:'\Software\Microsoft\Office\14.0\Common\MailSettings' -Name "NewSignature" -Value $SIGNATURE_COMPOSE_NAME -PropertyType "String" -Force
+    } else {
+        Write-Host "Office 2010 not installed, 2010 signatures skipped"
+    }
+
+    # Office 2013
+    if (Test-Path HKCU:Software\Microsoft\Office\15.0) {
+        Write-Host "Forcing set signature for Outlook 2013"
+        New-ItemProperty HKCU:'\Software\Microsoft\Office\15.0\Common\MailSettings' -Name "ReplySignature" -Value $SIGNATURE_REPLY_NAME -PropertyType "String" -Force
+        New-ItemProperty HKCU:'\Software\Microsoft\Office\15.0\Common\MailSettings' -Name "NewSignature" -Value $SIGNATURE_COMPOSE_NAME -PropertyType "String" -Force
+    } else {
+        Write-Host "Office 2013 not installed, 2013 signatures skipped"
+    }
+} else {
+    # Office 2010
+    If (Test-RegistryValue HKCU:'\Software\Microsoft\Office\14.0\Common\MailSettings' "NewSignature") {
+        Write-Host "Removing signature enforcement for Outlook 2010"
+        Remove-ItemProperty HKCU:'\Software\Microsoft\Office\14.0\Common\MailSettings' -Name "ReplySignature" -Force
+        Remove-ItemProperty HKCU:'\Software\Microsoft\Office\14.0\Common\MailSettings' -Name "NewSignature" -Force
+    }
+
+    # Office 2013
+    if (Test-RegistryValue HKCU:'\Software\Microsoft\Office\15.0\Common\MailSettings' "NewSignature") {
+        Write-Host "Removing signature enforcement for Outlook 2013"
+        Remove-ItemProperty HKCU:'\Software\Microsoft\Office\15.0\Common\MailSettings' -Name "ReplySignature" -Force
+        Remove-ItemProperty HKCU:'\Software\Microsoft\Office\15.0\Common\MailSettings' -Name "NewSignature" -Force
+    }
+}
+
+if ($SIGNATURE_FORCE_THEME) {
+    Write-Host "Themes are enforced, setting font for compose and reply"
+
+    $emailCompose.Font.Name = $SIGNATURE_COMPOSE_FONT
+    $emailCompose.Font.Size = $SIGNATURE_COMPOSE_SIZE
+    $emailCompose.Font.Color = $SIGNATURE_COMPOSE_COLOR
+
+    $emailReply.Font.Name = $SIGNATURE_REPLY_FONT
+    $emailReply.Font.Size = $SIGNATURE_REPLY_SIZE
+    $emailReply.Font.Color = $SIGNATURE_REPLY_COLOR
+
+    # Ensure no custom themes are used
+    $emailOptions.ThemeName = "none"
+}
+
+if ($SIGNATURE_MARK_COMMENTS) {
+    Write-Host "Email comments are marked, setting mark as user initials"
+
+    $emailOptions.MarkCommentsWith = $MSWord.UserInitials
+    $emailOptions.MarkComments = $true
+}
+
+# Timestamp the last run time
+$newTime = (Get-Date).ToFileTimeUtc()
+New-Item $timestampPath -type file -force
+Add-Content $timestampPath $newTime
+
+ExitGracefully
+```

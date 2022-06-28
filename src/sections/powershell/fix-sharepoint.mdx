@@ -1,0 +1,31 @@
+## Repair Sharepoint apps after theme change
+
+On SharePoint, if you change the theme of an App on the App Catalog, or change a theme of a site that contains an Apps, all the Apps in the App Catalog will fail catastrophically.
+
+This script is a quick fixme that requires zero configuration, just upload it to the SharePoint server and run it to repair the App Catalog entirely.
+
+```powershell
+#!/usr/local/bin/pwsh
+# Written by George Paton
+## This little number automatically fixes that annoying app breaking bug to do with themes
+## If an app is complaining about being unable to open a file, run me on the SP server
+
+
+# Add the sharepoint snapin to the current session
+Add-PSSnapin Microsoft.Sharepoint.Powershell
+
+# Get the app prefix
+$prefix = Get-SPAppSiteSubscriptionName
+# Use the app prefix to get all app urls
+$allappurls = Get-SPSite | Get-SPWeb -Limit All | where {$_.url -like "http://$prefix*"}
+
+foreach ($app in $allappurls)
+{
+    # Loop through all apps within the default site with the app prefix of $prefix
+	$name = $app.name
+	$app.CustomMasterUrl = "/$name/_catalogs/masterpage/app.master"
+	$app.MasterUrl = "/$name/_catalogs/masterpage/app.master"
+	$app.Update()
+    echo "Updating masterpage for $app"
+}
+```
