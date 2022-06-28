@@ -18,12 +18,23 @@ import Header from "../components/header"
 import AboutMdx from "../sections/about"
 import Projects from "../sections/projects"
 import Skills from "../sections/skills"
+import Links from "../sections/links"
 
 
 // markup
 const IndexPage = () => {
     const parallax = React.useRef<IParallax>(null!)
     const isBrowser = typeof window !== 'undefined';
+    const isPortrait = isBrowser && window.innerHeight > window.innerWidth;
+
+    const [dimensions, setDimensions] = React.useState([isPortrait ? 350 : 500, isPortrait ? 500 : 300]);
+
+    React.useEffect(() => {
+        window.addEventListener("resize", () => {
+            const isPortrait = isBrowser && window.innerHeight > window.innerWidth;
+            setDimensions([isPortrait ? 350 : 500, isPortrait ? 500 : 300]);
+        });
+    }, []);
 
     return (
         <main>
@@ -69,9 +80,17 @@ const IndexPage = () => {
                 <ParallaxLayer offset={0.9} speed={0.3}>
                     <div className="background-parallelogram"></div>
                 </ParallaxLayer>
-                <ParallaxLayer className="page" offset={0.9} speed={0.5}>
+                <ParallaxLayer className="page" offset={0.99} speed={0.5}>
                     <section>
                         <AboutMdx />
+                    </section>
+                    <section>
+                        <h2>Links</h2>
+                        <ul>
+                            {Links.map((link, i) => {
+                                return <li key={i}><a href={link.href}>{link.title}</a>&nbsp;&nbsp;&nbsp;&ndash;&nbsp;&nbsp;&nbsp;{link.description}</li>
+                            })}
+                        </ul>
                     </section>
                 </ParallaxLayer>
 
@@ -88,8 +107,8 @@ const IndexPage = () => {
                     <div style={{maxWidth: 1200, margin: 'auto'}}>
                         <WordCloud
                             data={Skills}
-                            width={isBrowser && window.innerHeight > window.innerWidth ? 300 : 500}
-                            height={isBrowser && window.innerHeight > window.innerWidth ? 500 : 300}
+                            width={dimensions[0]}
+                            height={dimensions[1]}
                             font="Milletun"
                             fill={() => Math.random() > 0.5 ? 'cyan' : 'magenta'}
                             padding={4}
@@ -102,7 +121,7 @@ const IndexPage = () => {
                 <ParallaxLayer offset={2.4}>
                     <div className="background-hatch"></div>
                 </ParallaxLayer>
-                <ParallaxLayer className="background-title" offset={2} speed={0.25}>
+                <ParallaxLayer className="background-title" offset={2.2} speed={0.25}>
                     <div className="up-down" aria-hidden="true">
                         Projects
                     </div>

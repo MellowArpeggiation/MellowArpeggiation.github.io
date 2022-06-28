@@ -14,7 +14,10 @@ body {
     color: white;
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-size: 1.5em;
+
+    @media (min-width: $breakpoint-tablet-min) {
+        font-size: 1.5em;
+    }
 }
 
 a {
@@ -53,7 +56,7 @@ a {
     }
 }
 
-p, h2, h3, h4 {
+p, h2, h3, h4, li {
     font-weight: lighter;
 }
 
@@ -79,6 +82,10 @@ section {
     @media (max-width: $breakpoint-mobile-max) {
         margin: 16px;
     }
+}
+
+ul {
+    list-style-type: square;
 }
 
 .scroll-to-top {
