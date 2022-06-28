@@ -1,0 +1,48 @@
+{
+  "name": "mellow-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "mellow-portfolio",
+  "author": "George Paton",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "typecheck": "tsc --noEmit",
+    "deploy": "gatsby build && gh-pages -d public -b public"
+  },
+  "dependencies": {
+    "@mdx-js/mdx": "^1.6.22",
+    "@mdx-js/react": "^1.6.22",
+    "@react-spring/parallax": "^9.4.5",
+    "gatsby": "^4.15.2",
+    "gatsby-plugin-image": "^2.16.1",
+    "gatsby-plugin-manifest": "^4.15.1",
+    "gatsby-plugin-mdx": "^3.15.1",
+    "gatsby-plugin-sass": "^5.15.1",
+    "gatsby-plugin-sharp": "^4.16.1",
+    "gatsby-remark-images": "^6.16.0",
+    "gatsby-remark-prismjs": "^6.17.0",
+    "gatsby-source-filesystem": "^4.15.0",
+    "gatsby-transformer-sharp": "^4.16.0",
+    "prismjs": "^1.28.0",
+    "react": "^17.0.2",
+    "react-anagram-animation": "^1.2.0",
+    "react-d3-cloud": "^1.0.5",
+    "react-dom": "^17.0.2",
+    "react-vertical-timeline-component": "^3.5.2",
+    "sass": "^1.52.1"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.35",
+    "@types/react": "^18.0.9",
+    "@types/react-dom": "^18.0.5",
+    "gh-pages": "^4.0.0",
+    "typescript": "^4.7.2"
+  }
+}
