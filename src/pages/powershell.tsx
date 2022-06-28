@@ -3,6 +3,7 @@ import * as React from "react"
 import SignaturesMdx from "../sections/powershell/outlook-signatures"
 // @ts-ignore
 import SharepointMdx from "../sections/powershell/fix-sharepoint"
+import ScrollToTop from "../components/scroll-to-top"
 
 
 const PowershellPage = () => {
@@ -34,6 +35,9 @@ const PowershellPage = () => {
             <div className="block-center">
                 <a href="/">Go home</a>
             </div>
+            <br />
+
+            <ScrollToTop />
         </main>
     )
 }

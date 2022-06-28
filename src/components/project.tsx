@@ -2,7 +2,7 @@ import * as React from "react"
 
 type Props = {
     side: string,
-    children?: JSX.Element | JSX.Element[];
+    children?: JSX.Element | JSX.Element[],
 };
 
 const Project: React.FunctionComponent<Props> = ({

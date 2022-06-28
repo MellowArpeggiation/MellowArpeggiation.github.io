@@ -11,8 +11,8 @@ const Header = ({ title }: HeaderProps) =>
             <span>{title}</span>
         </h1>
         <h1 className="mobile-visible">
-            M
-            <span>M</span>
+            {title[0]}
+            <span>{title[0]}</span>
         </h1>
     </div>
 
