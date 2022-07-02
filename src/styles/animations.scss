@@ -68,3 +68,13 @@
         transform: rotate(360deg);
     }
 }
+
+
+@keyframes scroll {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-160px);
+    }
+}

@@ -118,7 +118,7 @@ ul {
     }
 
     // Styles
-    &.btn-default {
+    &.btn-default, &.btn-source {
         border: 2px solid cyan;
         transition: border-color 0.4s, color 0.4s;
 
@@ -134,6 +134,32 @@ ul {
 
         &:hover {
             background: magenta;
+        }
+    }
+
+    &.btn-source {
+        position: relative;
+        overflow: hidden;
+
+        .source-lines {
+            position: absolute;
+            width: 100%;
+
+            animation: scroll 4s linear infinite;
+
+            > * {
+                background: rgba(0, 255, 255, 0.2);
+                transition: background 0.4s;
+
+                height: 12px;
+                margin-bottom: 8px;
+            }
+        }
+
+        &:hover {
+            .source-lines > * {
+                background: rgba(255, 0, 255, 0.4);
+            }
         }
     }
 }
