@@ -12,8 +12,8 @@ import LoccysChoccysMdx from "../sections/games/loccys-choccys"
 import OkBoomerMdx from "../sections/games/ok-boomer"
 // @ts-ignore
 import MortalisMachinaMdx from "../sections/games/mortalis-machina"
-// @ts-ignore
-import MovieJazzMdx from "../sections/projects/moviejazz"
+// // @ts-ignore
+// import MovieJazzMdx from "../sections/projects/moviejazz"
 // @ts-ignore
 import GreentreeMdx from "../sections/projects/gt-redesign"
 // @ts-ignore
@@ -77,11 +77,11 @@ const Projects: Project[] = [
         date: '2016',
         color: workColor,
     },
-    {
-        content: MovieJazzMdx,
-        date: '2016',
-        color: workColor,
-    },
+    // {
+    //     content: MovieJazzMdx,
+    //     date: '2016',
+    //     color: workColor,
+    // },
     {
         content: GraduatedMdx,
         date: '2016',
