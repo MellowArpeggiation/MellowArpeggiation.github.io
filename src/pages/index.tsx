@@ -3,9 +3,6 @@ import { Parallax, ParallaxLayer, IParallax } from '@react-spring/parallax'
 import WordCloud from "react-d3-cloud"
 // @ts-ignore
 import Anagram from 'react-anagram-animation'
-// @ts-ignore
-import { MDXProvider } from "@mdx-js/react"
-import { StaticImage } from "gatsby-plugin-image"
 
 // @ts-ignore
 import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
