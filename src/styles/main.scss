@@ -22,15 +22,15 @@ body {
 
 a {
     color: cyan;
+    text-decoration: none;
+    outline: none;
 
     &:hover {
         color: magenta;
     }
 
-    &:not(.disable-underline) {
+    &:not(.btn) {
         position: relative;
-        text-decoration: none;
-        outline: none;
 
         &::after {
             content: "";
@@ -49,10 +49,6 @@ a {
             opacity: 1;
             transform: translateY(0);
         }
-    }
-
-    .vertical-timeline-element-content & {
-        font-size: 1.5rem;
     }
 }
 
@@ -86,6 +82,55 @@ section {
 
 ul {
     list-style-type: square;
+}
+
+.vertical-timeline-element-content {
+    text-align: center;
+
+    .vertical-timeline-element-date {
+        text-align: left;
+
+        @media (max-width: $breakpoint-mobile-max) {
+            float: none;
+        }
+    }
+
+    a::after {
+        content: none;
+    }
+}
+
+.btn {
+    display: block;
+
+    padding: 10px 20px;
+    text-align: center;
+
+    border-radius: 4px;
+
+    + .btn {
+        margin-top: 1em;
+    }
+
+    // Styles
+    &.btn-default {
+        border: 2px solid cyan;
+        transition: border-color 0.4s, color 0.4s;
+
+        &:hover {
+            border-color: magenta;
+        }
+    }
+
+    &.btn-primary {
+        background: cyan;
+        color: black;
+        transition: background 0.4s;
+
+        &:hover {
+            background: magenta;
+        }
+    }
 }
 
 .scroll-to-top {
