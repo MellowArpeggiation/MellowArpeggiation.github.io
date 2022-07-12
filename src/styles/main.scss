@@ -84,6 +84,19 @@ ul {
     list-style-type: square;
 }
 
+blockquote {
+    margin: 0;
+    padding: 0 32px;
+
+    font-style: italic;
+
+    border-left: solid 8px white;
+
+    p {
+        margin: 0;
+    }
+}
+
 .vertical-timeline-element-content {
     text-align: center;
 

@@ -10,6 +10,7 @@ import 'react-vertical-timeline-component/style.min.css';
 
 import "../styles/main.scss"
 import Header from "../components/header"
+import Copyright from "../components/copyright"
 
 // @ts-ignore
 import AboutMdx from "../sections/about"
@@ -137,6 +138,7 @@ const IndexPage = () => {
                             </VerticalTimelineElement>
                         })}
                     </VerticalTimeline>
+                    <Copyright />
                 </ParallaxLayer>
             </Parallax>
         </main>
