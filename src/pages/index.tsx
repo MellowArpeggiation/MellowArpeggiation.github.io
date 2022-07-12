@@ -21,16 +21,16 @@ import Links from "../sections/links"
 
 // markup
 const IndexPage = () => {
-    const parallax = React.useRef<IParallax>(null!)
+    const parallax = React.useRef<IParallax>(null!);
     const isBrowser = typeof window !== 'undefined';
     const isPortrait = isBrowser && window.innerHeight > window.innerWidth;
 
-    const [dimensions, setDimensions] = React.useState([isPortrait ? 350 : 500, isPortrait ? 500 : 300]);
+    const [dimensions, setDimensions] = React.useState(getWordCloudDimensions(isPortrait));
 
     React.useEffect(() => {
         window.addEventListener("resize", () => {
-            const isPortrait = isBrowser && window.innerHeight > window.innerWidth;
-            setDimensions([isPortrait ? 350 : 500, isPortrait ? 500 : 300]);
+            const isPortrait = window.innerHeight > window.innerWidth;
+            setDimensions(getWordCloudDimensions(isPortrait));
         });
     }, []);
 
@@ -144,5 +144,7 @@ const IndexPage = () => {
         </main>
     )
 }
+
+const getWordCloudDimensions = (isPortrait: boolean) => [isPortrait ? 350 : 500, isPortrait ? 500 : 300];
 
 export default IndexPage

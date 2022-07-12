@@ -17,8 +17,8 @@ const BtnSource = ({ href, style, children }: BtnProps) => {
 
     return <a className="btn btn-source" href={href} style={style}>
         <div className="source-lines">
-            {lines.map((lineWidth) => {
-                return <div style={{ width: lineWidth + '%' }}></div>
+            {lines.map((lineWidth, i) => {
+                return <div key={i} style={{ width: lineWidth + '%' }}></div>
             })}
         </div>
 
