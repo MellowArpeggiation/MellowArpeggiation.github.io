@@ -27,10 +27,25 @@ const IndexPage = () => {
 
     const [dimensions, setDimensions] = React.useState(getWordCloudDimensions(isPortrait));
 
+    // We can't really set page size dynamically, so we do a weird hack to force it, yeah it's messy and bad for performance,
+    // but the alternative is cutting off content or ending up with a massive dead area at the bottom of the page.
+    let resizeTimeout: any;
+    resizeTimeout = setTimeout(() => {
+        setParallaxHeight(parallax.current);
+        resizeTimeout = null;
+    }, 49);
+
     React.useEffect(() => {
         window.addEventListener("resize", () => {
             const isPortrait = window.innerHeight > window.innerWidth;
             setDimensions(getWordCloudDimensions(isPortrait));
+
+            if (resizeTimeout) clearTimeout(resizeTimeout);
+
+            resizeTimeout = setTimeout(() => {
+                setParallaxHeight(parallax.current);
+                resizeTimeout = null;
+            }, 49);
         });
     }, []);
 
@@ -124,7 +139,7 @@ const IndexPage = () => {
                         Projects
                     </div>
                 </ParallaxLayer>
-                <ParallaxLayer offset={2.4} speed={0.5}>
+                <ParallaxLayer offset={2.4}>
                     <VerticalTimeline lineColor={'linear-gradient(180deg, transparent, cyan 64px, cyan 95%, transparent)'}>
                         {Projects.map((project, i) => {
                             return <VerticalTimelineElement
@@ -146,5 +161,17 @@ const IndexPage = () => {
 }
 
 const getWordCloudDimensions = (isPortrait: boolean) => [isPortrait ? 350 : 500, isPortrait ? 500 : 300];
+
+const setParallaxHeight = (parallax: IParallax) => {
+    if (!parallax) return;
+
+    const content = parallax.content.current;
+
+    // 2.4 is the current offset of the last parallax element
+    const parallaxTopOffset = 2.4 * window.innerHeight;
+    const lastContainerHeight = content.lastChild.scrollHeight;
+
+    content.style.height = (parallaxTopOffset + lastContainerHeight) + 'px';
+}
 
 export default IndexPage
