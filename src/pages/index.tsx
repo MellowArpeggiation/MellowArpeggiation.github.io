@@ -33,7 +33,7 @@ const IndexPage = () => {
     resizeTimeout = setTimeout(() => {
         setParallaxHeight(parallax.current);
         resizeTimeout = null;
-    }, 49);
+    }, 98);
 
     React.useEffect(() => {
         window.addEventListener("resize", () => {
@@ -45,7 +45,7 @@ const IndexPage = () => {
             resizeTimeout = setTimeout(() => {
                 setParallaxHeight(parallax.current);
                 resizeTimeout = null;
-            }, 49);
+            }, 98);
         });
     }, []);
 
@@ -139,7 +139,7 @@ const IndexPage = () => {
                         Projects
                     </div>
                 </ParallaxLayer>
-                <ParallaxLayer offset={2.4}>
+                <ParallaxLayer offset={2.4} speed={0.5}>
                     <VerticalTimeline lineColor={'linear-gradient(180deg, transparent, cyan 64px, cyan 95%, transparent)'}>
                         {Projects.map((project, i) => {
                             return <VerticalTimelineElement
@@ -168,10 +168,14 @@ const setParallaxHeight = (parallax: IParallax) => {
     const content = parallax.content.current;
 
     // 2.4 is the current offset of the last parallax element
-    const parallaxTopOffset = 2.4 * window.innerHeight;
-    const lastContainerHeight = content.lastChild.scrollHeight;
+    // 1280 is the breakpoint at which the root em size increases
+    // Everything else is a magic number based on the internal implementation of react-spring,
+    // so beware, here be dragons
+    const parallaxTopOffset = (2.4 + 0.2) * window.innerHeight;
+    const lastContainerHeight = content.lastChild.scrollHeight * 0.8;
+    const fixedOffset = window.innerWidth < 1280 ? -600 : -1000;
 
-    content.style.height = (parallaxTopOffset + lastContainerHeight) + 'px';
+    content.style.height = (parallaxTopOffset + lastContainerHeight + fixedOffset) + 'px';
 }
 
 export default IndexPage
