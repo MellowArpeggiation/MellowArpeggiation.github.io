@@ -6,7 +6,7 @@ type Link = {
 
 const Links: Link[] = [
     {
-        href: 'http://rpg8.me/itchio',
+        href: 'https://mellowarpeggiation.itch.io',
         title: 'itch.io',
         description: 'Where I release all my games, and talk about games development',
     },
