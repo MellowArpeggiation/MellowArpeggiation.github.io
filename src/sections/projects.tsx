@@ -17,6 +17,8 @@ import MortalisMachinaMdx from "../sections/games/mortalis-machina"
 // @ts-ignore
 import GreentreeMdx from "../sections/projects/gt-redesign"
 // @ts-ignore
+import MellowMdx from "../sections/projects/mellow"
+// @ts-ignore
 import OceaneeringMdx from "../sections/projects/oceaneering"
 // @ts-ignore
 import WebForceFiveMdx from "../sections/projects/webforcefive"
@@ -46,6 +48,11 @@ const Projects: Project[] = [
         content: DriftKingMdx,
         date: '2020 - now',
         color: personalColor,
+    },
+    {
+        content: MellowMdx,
+        date: '2023',
+        color: workColor,
     },
     {
         content: BarefootBowenMdx,

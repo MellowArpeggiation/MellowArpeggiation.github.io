@@ -21,9 +21,9 @@ const Links: Link[] = [
         description: 'Where I share weird art, fitness updates, and development videos',
     },
     {
-        href: 'http://rpg8.me/twitter',
-        title: 'Twitter',
-        description: 'I sometimes post here, but not often',
+        href: 'http://rpg8.me/mastodon',
+        title: 'Mastodon',
+        description: 'I sometimes post here, and laugh at the demise of Twitter',
     },
     {
         href: 'http://rpg8.me/soundcloud',
