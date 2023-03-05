@@ -3,6 +3,8 @@ import { FunctionComponent } from "react"
 // @ts-ignore
 import DriftKingMdx from "../sections/games/drift-king"
 // @ts-ignore
+import FungMdx from "../sections/games/fung"
+// @ts-ignore
 import BarefootBowenMdx from "../sections/games/barefoot-bowen"
 // @ts-ignore
 import TotemMdx from "../sections/games/totem"
@@ -47,6 +49,11 @@ const Projects: Project[] = [
     {
         content: DriftKingMdx,
         date: '2020 - now',
+        color: personalColor,
+    },
+    {
+        content: FungMdx,
+        date: '2023',
         color: personalColor,
     },
     {
