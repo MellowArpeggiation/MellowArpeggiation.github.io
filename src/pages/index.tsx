@@ -1,6 +1,9 @@
 import * as React from "react"
 import { Parallax, ParallaxLayer, IParallax } from '@react-spring/parallax'
+// @ts-ignore
 import WordCloud from "react-d3-cloud"
+// @ts-ignore
+import DocumentMeta from 'react-document-meta';
 // @ts-ignore
 import Anagram from 'react-anagram-animation'
 
@@ -51,7 +54,10 @@ const IndexPage = () => {
 
     return (
         <main>
-            <title>Mᴇʟʟᴏᴡ Aʀᴘᴇɢɢɪᴀᴛɪᴏɴ</title>
+            <DocumentMeta
+                title={'Mᴇʟʟᴏᴡ Aʀᴘᴇɢɢɪᴀᴛɪᴏɴ'}
+                description={'Mellow Arpeggiation, also known as George William Paton. A Game Developer, Musician, and Director of Mellow Pty Ltd. Located in Melbourne, Victoria. George is developing indie games with a taste for the functional, minimal, and heartwarming.'}
+            />
             <Parallax
                 ref={parallax}
                 pages={8}
