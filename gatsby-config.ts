@@ -2,7 +2,9 @@ import type { GatsbyConfig } from "gatsby";
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    title: 'Mellow Portfolio',
+    title: 'Mᴇʟʟᴏᴡ Aʀᴘᴇɢɢɪᴀᴛɪᴏɴ',
+    description: 'Mellow Arpeggiation, also known as George William Paton. A Game Developer, Musician, and Director of Mellow Pty Ltd. Located in Melbourne, Victoria. George is developing indie games with a taste for the functional, minimal, and heartwarming.',
+    image: '/mellow.png',
     siteUrl: 'http://arpeggi.at',
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
