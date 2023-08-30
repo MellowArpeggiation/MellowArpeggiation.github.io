@@ -1,8 +1,8 @@
-precision mediump float;
+precision highp float;
 #define PI 3.1415926538
 #define TAU 6.2831853072
 
-uniform sampler2D previousAgentFrame;
+uniform highp sampler2D previousAgentFrame;
 uniform sampler2D previousDiffuseFrame;
 uniform sampler2D wallMask;
 
