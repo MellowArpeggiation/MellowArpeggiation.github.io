@@ -166,6 +166,7 @@
                 dt: dt,
                 resolution: [gl.canvas.width, gl.canvas.height],
                 dimensions: [640, 360], // Buffer size for diffusion is restricted and stretched to full resolution
+                scale: gl.canvas.width / 640,
 
                 agentCount: agentCount,
                 moveSpeed: moveSpeed,
