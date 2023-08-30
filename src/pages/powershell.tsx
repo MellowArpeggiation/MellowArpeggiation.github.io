@@ -10,26 +10,28 @@ import "../styles/prism-funky.scss"
 const PowershellPage = () => {
     return (
         <main className="container">
-            <div className="block-center">
-                <h1>Useful Powershell scripts</h1>
-            </div>
+            <section>
+                <div className="block-center">
+                    <h1>Useful Powershell scripts</h1>
+                </div>
 
-            <h3>Table of contents</h3>
-            <ul>
-                <li><a href="#outlook-signatures">Autogenerate Outlook signatures</a></li>
-                <li><a href="#fix-sharepoint">Repair Sharepoint apps after theme change</a></li>
-            </ul>
-            <br />
-
-            <div id="outlook-signatures">
-                <SignaturesMdx />
-                <hr />
-            </div>
-
-            <div id="fix-sharepoint">
-                <SharepointMdx />
+                <h3>Table of contents</h3>
+                <ul>
+                    <li><a href="#outlook-signatures">Autogenerate Outlook signatures</a></li>
+                    <li><a href="#fix-sharepoint">Repair Sharepoint apps after theme change</a></li>
+                </ul>
                 <br />
-            </div>
+
+                <div id="outlook-signatures">
+                    <SignaturesMdx />
+                    <hr />
+                </div>
+
+                <div id="fix-sharepoint">
+                    <SharepointMdx />
+                    <br />
+                </div>
+            </section>
 
             <div className="block-center">
                 <a href="/">Go home</a>

@@ -6,9 +6,11 @@ import ScrollToTop from "../components/scroll-to-top"
 const PowershellPage = () => {
     return (
         <main className="container">
-            <div id="outlook-signatures">
-                <AnswersMdx />
-            </div>
+            <section>
+                <div id="answers">
+                    <AnswersMdx />
+                </div>
+            </section>
 
             <div className="block-center">
                 <a href="/">Go home</a>
