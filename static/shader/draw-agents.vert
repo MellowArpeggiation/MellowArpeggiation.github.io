@@ -1,6 +1,6 @@
 attribute float agentId;
 uniform float agentCount;
-uniform sampler2D previousAgentFrame;
+uniform highp sampler2D previousAgentFrame;
 uniform float scale;
 
 #define PI radians(180.0)
