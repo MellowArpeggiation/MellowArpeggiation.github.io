@@ -3,14 +3,19 @@ import { useState, useEffect } from "react"
 import { FungCanvas } from "@mellowarpeggiation/fung.js"
 import { Helmet } from "react-helmet"
 
+import "../styles/main.scss"
+
 const FungPage = () => {
     const isBrowser = typeof screen !== 'undefined';
+    if (!isBrowser) {
+        return (<></>);
+    }
 
     let [fromColor, setFromColor] = useState("magenta");
     let [toColor, setToColor] = useState("cyan");
 
-    let [width, setWidth] = useState(isBrowser ? screen.width : 1920);
-    let [portrait, setPortrait] = useState(isBrowser ? screen.height > screen.width : false);
+    let [width, setWidth] = useState(screen.width);
+    let [portrait, setPortrait] = useState(screen.height > screen.width);
 
     useEffect(() => {
         // const render = (time: number) => {
