@@ -54,4 +54,8 @@
         text-align: center;
         margin-bottom: 2em;
     }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: cyan;
+    }
 }
