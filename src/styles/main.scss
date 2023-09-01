@@ -2,6 +2,7 @@
 @import "mixins";
 @import "fonts";
 @import "animations";
+@import "fung";
 
 *,
 *::before,
@@ -57,10 +58,12 @@ p, h2, h3, h4, li {
 }
 
 h1 {
+    font-family: "Milletun", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 3em;
+
     @media (min-width: $breakpoint-mobile-min) {
         font-size: 4em;
     }
-    font-family: "Milletun", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 h3 {
@@ -97,6 +100,10 @@ blockquote {
     p {
         margin: 0;
     }
+}
+
+iframe {
+    border: none;
 }
 
 .vertical-timeline-element-content {
