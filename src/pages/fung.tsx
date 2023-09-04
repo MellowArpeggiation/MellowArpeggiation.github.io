@@ -6,7 +6,7 @@ import { Helmet } from "react-helmet"
 import "../styles/main.scss"
 
 const FungPage = () => {
-    const isBrowser = typeof screen !== 'undefined';
+    const isBrowser = typeof window !== 'undefined';
     if (!isBrowser) {
         return (<></>);
     }
@@ -14,29 +14,19 @@ const FungPage = () => {
     let [fromColor, setFromColor] = useState("magenta");
     let [toColor, setToColor] = useState("cyan");
 
-    let [width, setWidth] = useState(screen.width);
-    let [portrait, setPortrait] = useState(screen.height > screen.width);
+    let [width, setWidth] = useState(window.outerWidth);
+    let [portrait, setPortrait] = useState(window.outerHeight > window.outerWidth);
 
     useEffect(() => {
-        // const render = (time: number) => {
-        //     time *= 0.001;
-            
-        //     setFromColor("hsl(" + time * 360 * 0.01 % 360 + ", 100%, 50%)");
-        //     setToColor("hsl(" + time * 360 * 0.045 % 360 + ", 100%, 50%)");
-
-        //     requestAnimationFrame(render);
-        // };
-        // setTimeout(() => {
-        //     requestAnimationFrame(render);
-        // }, 200);
-
         const onResize = () => {
-            setWidth(screen.width);
-            setPortrait(screen.height > screen.width);
+            setTimeout(function () {
+                setPortrait(window.outerHeight > window.outerWidth);
+                setWidth(window.outerWidth);
+            }, 100);
         };
 
         window.addEventListener('resize', onResize);
-
+        
         return () => {
             window.removeEventListener('resize', onResize);
         }

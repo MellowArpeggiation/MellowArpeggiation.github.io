@@ -19,7 +19,7 @@
   "dependencies": {
     "@mdx-js/mdx": "^1.6.22",
     "@mdx-js/react": "^1.6.22",
-    "@mellowarpeggiation/fung.js": "^0.0.5",
+    "@mellowarpeggiation/fung.js": "^0.0.7",
     "@react-spring/parallax": "^9.4.5",
     "gatsby": "^4.15.2",
     "gatsby-plugin-catch-links": "^4.17.0",
