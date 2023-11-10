@@ -53,7 +53,7 @@ const Projects: Project[] = [
     },
     {
         content: FungMdx,
-        date: '2023',
+        date: '2023 - now',
         color: personalColor,
     },
     {
